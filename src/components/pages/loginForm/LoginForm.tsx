@@ -11,7 +11,7 @@ export default function LoginForm() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        navigate("/home")
+        navigate(`/pokedex/${user.username}`)
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

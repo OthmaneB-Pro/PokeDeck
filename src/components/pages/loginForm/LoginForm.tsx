@@ -1,15 +1,34 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function LoginForm() {
+    const navigate = useNavigate()
+    const [user, setUser] = useState({
+        username : "",
+        password : "",
+    })
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        navigate("/home")
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = event.target;
+        setUser((dataUser) => ({...dataUser, [name]: value}))
+    }
   return (
     <LoginFormStyled>
       <div className="container">
+        <form action="submit" onSubmit={handleSubmit}>
         <h1>Connexion</h1>
-        <label>Email :</label>
-        <input type="email" placeholder="Entrez votre email" />
+        <label>Nom :</label>
+        <input value={user.username} name="username" type="text" placeholder="Entrez votre nom" onChange={handleChange}/>
         <label>Mot de passe :</label>
-        <input type="password" placeholder="Entrez votre mot de passe" />
-        <button>Se connecter</button>
+        <input value={user.password} name="password" type="password" placeholder="Entrez votre mot de passe" onChange={handleChange} />
+        <button type="submit">Se connecter</button>
+        </form>
       </div>
     </LoginFormStyled>
   );
@@ -54,7 +73,7 @@ const LoginFormStyled = styled.div`
   }
 
   input {
-    width: 100%;
+    width: 90%;
     padding: 12px 15px;
     margin-bottom: 20px;
     border: 1px solid #ddd;

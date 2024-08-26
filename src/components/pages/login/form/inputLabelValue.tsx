@@ -14,7 +14,7 @@ export const InputLabelValue = [
     name: "password",
     type: "password",
     placeholder: "Entrez votre mot de passe",
-    onChange: () => {}, 
+    onChange: () => {},
     required: true,
   },
 ];

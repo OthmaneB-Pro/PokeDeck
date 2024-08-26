@@ -5,6 +5,9 @@ import { LoginFormType } from "./form/LoginType";
 import LabelName from "../../reusable-ui/LabelName";
 import InputValue from "../../reusable-ui/InputValue";
 import { InputLabelValue } from "./form/inputLabelValue";
+import LinkInscription from "./form/LinkInscription";
+import Button from "../../reusable-ui/Button";
+import TitleForm from "./form/TitleForm";
 
 export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
   const navigate = useNavigate();
@@ -26,8 +29,7 @@ export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
   return (
     <LoginFormStyled>
       <form action="submit" onSubmit={handleSubmit}>
-        <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
-
+        <TitleForm isLogin={isLogin} />
         {InputLabelValue.map((inputData, index) => (
           <>
             <LabelName label={inputData.label} />
@@ -42,18 +44,9 @@ export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
             />
           </>
         ))}
-        <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
+        <Button type="submit" label={isLogin ? "Se connecter" : "S'inscrire"} />
       </form>
-      {isLogin ? (
-        <p>
-          Pas encore inscrit ?{" "}
-          <span className="link" onClick={() => setIsLogin(false)}>
-            Inscrivez-vous
-          </span>
-        </p>
-      ) : (
-        ""
-      )}
+      {isLogin ? <LinkInscription onClick={() => setIsLogin(false)} /> : ""}
     </LoginFormStyled>
   );
 }
@@ -68,46 +61,4 @@ const LoginFormStyled = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-  h1 {
-    margin-bottom: 30px;
-    color: #333;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  button {
-    background-color: #3a92da;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-
-    &:hover {
-      background-color: #357ab7;
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-
-  .link {
-    color: #3a92da;
-    cursor: pointer;
-    font-weight: bold;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: #357ab7;
-      text-decoration: underline;
-    }
-  }
 `;

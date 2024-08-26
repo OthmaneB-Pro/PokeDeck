@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-type LoginFormType = {
-  isLogin: boolean;
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
-};
+import { LoginFormType } from "./form/LoginType";
+import LabelName from "../../reusable-ui/LabelName";
+import InputValue from "../../reusable-ui/InputValue";
+import { InputLabelValue } from "./form/inputLabelValue";
 
 export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
   const navigate = useNavigate();
@@ -26,97 +25,55 @@ export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
 
   return (
     <LoginFormStyled>
-      <div className="container">
-        <form action="submit" onSubmit={handleSubmit}>
-          <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
-          <label>Nom :</label>
-          <input
-            value={user.username}
-            name="username"
-            type="text"
-            placeholder="Entrez votre nom"
-            onChange={handleChange}
-            required
-          />
-          <label>Mot de passe :</label>
-          <input
-            value={user.password}
-            name="password"
-            type="password"
-            placeholder="Entrez votre mot de passe"
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">
-            {isLogin ? "Se connecter" : "S'inscrire"}
-          </button>
-        </form>
-        {isLogin ? (
-          <p>
-            Pas encore inscrit ?{" "}
-            <span className="link" onClick={() => setIsLogin(false)}>
-              Inscrivez-vous
-            </span>
-          </p>
-        ) : (
-          ""
-        )}
-      </div>
+      <form action="submit" onSubmit={handleSubmit}>
+        <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
+
+        {InputLabelValue.map((inputData, index) => (
+          <>
+            <LabelName label={inputData.label} />
+            <InputValue
+              key={index}
+              name={inputData.name}
+              value={user[inputData.name as keyof typeof user]}
+              type={inputData.type}
+              placeholder={inputData.placeholder}
+              onChange={handleChange}
+              required
+            />
+          </>
+        ))}
+        <button type="submit">{isLogin ? "Se connecter" : "S'inscrire"}</button>
+      </form>
+      {isLogin ? (
+        <p>
+          Pas encore inscrit ?{" "}
+          <span className="link" onClick={() => setIsLogin(false)}>
+            Inscrivez-vous
+          </span>
+        </p>
+      ) : (
+        ""
+      )}
     </LoginFormStyled>
   );
 }
 
 const LoginFormStyled = styled.div`
-  height: 100vh;
-  background: url("/img/fond_pokemon.jpg") rgba(0, 0, 0, 0.7);
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: darken;
-  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 400px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-
-  .container {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 400px;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  text-align: center;
 
   h1 {
     margin-bottom: 30px;
     color: #333;
     font-size: 2rem;
     font-weight: bold;
-  }
-
-  label {
-    align-self: flex-start;
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  input {
-    width: 90%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border 0.3s ease;
-
-    &:focus {
-      border-color: #3a92da;
-      outline: none;
-    }
   }
 
   button {

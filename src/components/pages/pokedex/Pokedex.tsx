@@ -58,7 +58,7 @@ export default function Pokedex() {
                 namePokemon={pokemon.name.fr}
                 src={pokemon.sprites.regular}
                 alt={pokemon.name.fr}
-                typePokemon={pokemon.types.map((type) => type.image).join(" ")} 
+                typePokemon={pokemon.types.map((type) => type.image)}
               />
             ))}
           </div>

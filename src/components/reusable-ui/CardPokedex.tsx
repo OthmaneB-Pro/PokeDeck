@@ -5,7 +5,7 @@ type CardPokedexType = {
   alt: string;
   numero: number;
   namePokemon: string;
-  typePokemon: string;
+  typePokemon: string[];
 };
 
 export default function CardPokedex({
@@ -23,7 +23,9 @@ export default function CardPokedex({
       <div className="text-pokemon">
         <p>#{numero}</p>
         <h2>{namePokemon}</h2>
-        <p><img src={typePokemon} alt="Type pokemon" /></p>
+        <p>{typePokemon.map((image, index) => (
+            <img key={index} src={image} alt="Type icon" />
+          ))}</p>
       </div>
     </CardPokedexStyled>
   );

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../../reusable-ui/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CardPokedex from "../../reusable-ui/CardPokedex";
 
 type PokemonsType = {
   pokedex_id: number;
@@ -49,11 +50,12 @@ export default function Pokedex() {
         <div>
           <Button label="Deconnexion" />
           <Button label={`Votre Pokedex ${username}`} />
-          {pokemons.map((pokemon, index) => (
-            <div key={index}>
-              <span>{pokemon.name.fr}</span>
-            </div>
-          ))}
+          <div className="pokedex">
+          {pokemons.map((pokemon) => 
+              <CardPokedex key={pokemon.pokedex_id} numero={pokemon.pokedex_id} namePokemon={pokemon.name.fr} src={pokemon.sprites.shiny} alt={pokemon.name.fr} />
+          )
+          } 
+          </div>
         </div>
       </div>
     </PokedexStyled>
@@ -64,10 +66,18 @@ const PokedexStyled = styled.div`
   display: flex;
   justify-content: center;
   background: url("/img/pokemon_mignon.jfif") rgba(148, 148, 148, 0.7);
+  background-attachment: fixed;
   background-blend-mode: darken;
+  
+  
   .container {
     background: white;
     width: 1170px;
-    height: 100vh;
+    height: 100vh;  
+  }
+  .pokedex{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 30px;
   }
 `;

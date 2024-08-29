@@ -23,9 +23,11 @@ export default function CardPokedex({
       <div className="text-pokemon">
         <p>#{numero}</p>
         <h2>{namePokemon}</h2>
-        <p>{typePokemon.map((image, index) => (
+        <p>
+          {typePokemon.map((image, index) => (
             <img key={index} src={image} alt="Type icon" />
-          ))}</p>
+          ))}
+        </p>
       </div>
     </CardPokedexStyled>
   );
@@ -52,19 +54,19 @@ const CardPokedexStyled = styled.div`
   .text-pokemon {
     position: absolute;
 
-    p{
-        margin-bottom: 0;
-        margin-top: 0;
+    p {
+      margin-bottom: 0;
+      margin-top: 0;
 
-        img{
-            margin-top: 0;
-            width: 25px;
-            height: auto;
-        }
+      img {
+        margin-top: 0;
+        width: 25px;
+        height: auto;
+      }
     }
-    h2{
-        margin-top: 0px;
-        margin-bottom: 0px;
+    h2 {
+      margin-top: 0px;
+      margin-bottom: 0px;
     }
   }
 `;

@@ -72,13 +72,16 @@ const PokedexStyled = styled.div`
   display: flex;
   justify-content: center;
   background: url("/img/pokemon_mignon.jfif") rgba(148, 148, 148, 0.7);
-  background-attachment: fixed;
   background-blend-mode: darken;
+  background-repeat: space repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
 
   .container {
     background: white;
     width: 1170px;
-    height: 100vh;
+    padding: 20px;
+
   }
   .pokedex {
     display: grid;

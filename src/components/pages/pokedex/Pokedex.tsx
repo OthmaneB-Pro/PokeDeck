@@ -4,6 +4,9 @@ import Button from "../../reusable-ui/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardPokedex from "../../reusable-ui/CardPokedex";
+import { SiPokemon } from "react-icons/si";
+import { TbPokeball } from "react-icons/tb";
+import { PiPokerChip } from "react-icons/pi";
 
 type PokemonsType = {
   pokedex_id: number;
@@ -28,6 +31,7 @@ export default function Pokedex() {
   const { username } = useParams();
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [generation, setGeneration] = useState(1);
+  const [isShiny, setIsShiny] = useState(false);
 
   const fetchPokemons = async (generation: number) => {
     try {
@@ -57,6 +61,9 @@ export default function Pokedex() {
   return (
     <PokedexStyled>
       <div className="container">
+        <h1>
+          <SiPokemon />
+        </h1>
         <div>
           <Button label="Deconnexion" />
           <Button label={`Votre Pokedex ${username}`} />
@@ -77,9 +84,15 @@ export default function Pokedex() {
                 key={pokemon.pokedex_id}
                 numero={pokemon.pokedex_id}
                 namePokemon={pokemon.name.fr}
-                src={pokemon.sprites.regular}
+                src={isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular}
                 alt={pokemon.name.fr}
                 typePokemon={pokemon.types.map((type) => type.image)}
+                IconPokeball={<TbPokeball />}
+                IconShiny={<PiPokerChip />}
+                onShiny={() => {
+                  setIsShiny(!isShiny);
+                }}
+                onPokeball={() => {}}
               />
             ))}
           </div>

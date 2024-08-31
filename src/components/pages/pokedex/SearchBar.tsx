@@ -28,7 +28,7 @@ export default function SearchBar() {
 }
 
 const SearchBarStyled = styled.div`
-  display: flex;
+  display: flex;  
   flex-direction: column;
   align-items: center;
   padding: 20px;

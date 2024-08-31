@@ -1,34 +1,46 @@
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { PokemonsType } from "../../reusable-type/pokemonType";
+import { fetchSearchPokemonsName } from "../../../api/PokemonApi";
 
 export default function SearchBar() {
-    const [name, setName] = useState("")
+  const [name, setName] = useState("");
+  const [resultsApiCall, setResultsApiCall] = useState<PokemonsType[]>([])
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value)
-    }
-
-    const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-    }
+  useEffect(() => {  
+    const debounce = setTimeout(() => {
+        if(name.trim() === ""){
+            setResultsApiCall([]);
+            return;
+        }
+        fetchSearchPokemonsName(name, setResultsApiCall)
+      }, 500);
+  
+      return () => clearTimeout(debounce);
+  }, [name])
+  
 
   return (
     <SearchBarStyled>
       <h3>Faites votre recherche :</h3>
       <div className="search-container">
-        <input type="search" placeholder="Recherchez votre Pokémon" value={name} onChange={handleChange}/>
-        <button type="submit" onSubmit={handleSubmit}>
+        <input
+          type="search"
+          placeholder="Recherchez votre Pokémon"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+        <button type="submit">
           <FaSearch />
         </button>
-
       </div>
     </SearchBarStyled>
   );
 }
 
 const SearchBarStyled = styled.div`
-  display: flex;  
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
@@ -56,7 +68,7 @@ const SearchBarStyled = styled.div`
     width: 100%;
     height: 45px;
     padding: 0 15px;
-    padding-right: 50px; 
+    padding-right: 50px;
     border-radius: 25px;
     border: 2px solid #ddd;
     background-color: #fff;

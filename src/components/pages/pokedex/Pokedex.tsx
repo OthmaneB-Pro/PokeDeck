@@ -1,30 +1,12 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import CardPokedex from "../../reusable-ui/CardPokedex";
 import { SiPokemon } from "react-icons/si";
 import { TbPokeball } from "react-icons/tb";
 import { PiPokerChip } from "react-icons/pi";
-
-type PokemonsType = {
-  pokedex_id: number;
-  generation: number;
-  category: string;
-  name: {
-    fr: string;
-  };
-  sprites: {
-    regular: string;
-    shiny: string;
-  };
-  types: [
-    {
-      name: string;
-      image: string;
-    }
-  ];
-};
+import { PokemonsType } from "../../reusable-type/pokemonType";
+import { fetchPokemons } from "../../../api/PokemonApi";
 
 export default function Pokedex() {
   const { username } = useParams();
@@ -32,29 +14,14 @@ export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
   const [isShiny, setIsShiny] = useState(false);
 
-  const fetchPokemons = async (generation: number) => {
-    try {
-      const res = await axios.get(
-        `https://tyradex.vercel.app/api/v1/gen/${generation}`
-      );
-      setPokemons(res.data);
-    } catch (err) {
-      console.error(
-        "Erreur dans la récupération des données des pokémons :",
-        err
-      );
-    }
-  };
-
   useEffect(() => {
-    fetchPokemons(generation);
-    console.log("oui");
+    fetchPokemons(generation, setPokemons);
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGeneration = parseInt(event.target.value);
     setGeneration(selectedGeneration);
-    fetchPokemons(selectedGeneration);
+    fetchPokemons(selectedGeneration, setPokemons);
   };
 
   return (

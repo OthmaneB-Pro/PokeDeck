@@ -14,3 +14,17 @@ export const fetchPokemons = async (generation: number, setPokemons: React.Dispa
       );
     }
   };
+
+  export const fetchSearchPokemonsName = async (setPokemons: React.Dispatch<React.SetStateAction<PokemonsType[]>>) => {
+    try {
+      const res = await axios.get(
+        `https://tyradex.vercel.app/api/v1/pokemon/`
+      );
+      setPokemons(res.data);
+    } catch (err) {
+      console.error(
+        "Erreur dans la récupération des données des pokémons :",
+        err
+      );
+    }
+  };

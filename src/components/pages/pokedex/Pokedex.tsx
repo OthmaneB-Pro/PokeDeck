@@ -7,6 +7,7 @@ import { PokemonsType } from "../../reusable-type/pokemonType";
 import { fetchPokemons } from "../../../api/PokemonApi";
 import GenerationPokemon from "./pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
+import SearchBar from "./SearchBar";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
@@ -26,6 +27,7 @@ export default function Pokedex() {
   return (
     <PokedexStyled>
       <TitlePokedex />
+      <SearchBar/>
       <GenerationPokemon generation={generation} handleChange={handleChange} />
       <div className="pokedex">
         {pokemons.map((pokemon) => (

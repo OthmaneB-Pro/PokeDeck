@@ -25,7 +25,7 @@ export default function Pokedex() {
 
   return (
     <PokedexStyled>
-      <TitlePokedex/>
+      <TitlePokedex />
       <GenerationPokemon generation={generation} handleChange={handleChange} />
       <div className="pokedex">
         {pokemons.map((pokemon) => (

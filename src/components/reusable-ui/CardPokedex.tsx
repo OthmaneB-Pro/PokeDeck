@@ -1,16 +1,7 @@
 import styled from "styled-components";
-
-type CardPokedexType = {
-  src: string;
-  alt: string;
-  numero: number;
-  namePokemon: string;
-  typePokemon: string[];
-  IconPokeball: JSX.Element;
-  IconShiny: JSX.Element;
-  onShiny: () => void;
-  onPokeball: () => void;
-};
+import { CardPokedexType } from "../reusable-type/pokemonType";
+import ImageSection from "../pages/pokedex/cardPokemon/ImageSection";
+import TextSection from "../pages/pokedex/cardPokemon/TextSection";
 
 export default function CardPokedex({
   src,
@@ -26,20 +17,17 @@ export default function CardPokedex({
   return (
     <CardPokedexStyled>
       <div className="image">
-        <img src={src} alt={alt} />
+        <ImageSection src={src} alt={alt} />
         <div className="button-pokemon">
           <button onClick={onPokeball}>{IconPokeball && IconPokeball}</button>
           <button onClick={onShiny}>{IconShiny && IconShiny}</button>
         </div>
       </div>
-
-      <div className="text-pokemon">
-        <p>#{numero}</p>
-        <h2>{namePokemon}</h2>
-        {typePokemon.map((image, index) => (
-          <img key={index} src={image} alt="Type icon" />
-        ))}
-      </div>
+      <TextSection
+        numero={numero}
+        namePokemon={namePokemon}
+        typePokemon={typePokemon}
+      />
     </CardPokedexStyled>
   );
 }
@@ -81,30 +69,6 @@ const CardPokedexStyled = styled.div`
           height: auto;
         }
       }
-    }
-    img {
-      margin-left: 35px;
-      width: 70%;
-      height: auto;
-      object-fit: cover;
-    }
-  }
-  .text-pokemon {
-    position: absolute;
-
-    img {
-      margin-top: 0;
-      width: 25px;
-      height: auto;
-    }
-    p {
-      margin-bottom: 0;
-      margin-top: 0;
-      color: #757575;
-    }
-    h2 {
-      margin-top: 0px;
-      margin-bottom: 0px;
     }
   }
 `;

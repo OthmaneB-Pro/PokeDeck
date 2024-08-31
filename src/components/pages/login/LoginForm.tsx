@@ -46,7 +46,7 @@ export default function LoginForm({ isLogin, setIsLogin }: LoginFormType) {
         ))}
         <Button type="submit" label={isLogin ? "Se connecter" : "S'inscrire"} />
       </form>
-      {isLogin ? <LinkInscription onClick={() => setIsLogin(false)} /> : ""}
+      {isLogin && <LinkInscription onClick={() => setIsLogin(false)} />}
     </LoginFormStyled>
   );
 }

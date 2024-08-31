@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ErrorPage from "./components/pages/error/ErrorPage";
-import Pokedex from "./components/pages/pokedex/Pokedex";
+import PokedexPage from "./components/pages/pokedex/PokedexPage";
 import LoginPage from "./components/pages/login/LoginPage";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
       <Routes>
       <Route path={"*"} element={<ErrorPage />} />
       <Route path={"/"} element={<LoginPage />} />
-      <Route path={"/pokedex/:username"} element={<Pokedex />} />
+      <Route path={"/pokedex/:username"} element={<PokedexPage />} />
       </Routes>
     </BrowserRouter>
   );

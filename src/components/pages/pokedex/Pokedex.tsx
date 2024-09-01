@@ -13,7 +13,7 @@ import { PokemonContext } from "../../../context/PokemonContext";
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [generation, setGeneration] = useState(1);
-  const {isShiny, setIsShiny} = useContext(PokemonContext)
+  const { isShiny, setIsShiny } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -28,7 +28,7 @@ export default function Pokedex() {
   return (
     <PokedexStyled>
       <TitlePokedex />
-      <SearchBar/>
+      <SearchBar />
       <GenerationPokemon generation={generation} handleChange={handleChange} />
       <div className="pokedex">
         {pokemons.map((pokemon) => (

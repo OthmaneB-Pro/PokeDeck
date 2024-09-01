@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { PokemonsType } from "../../reusable-type/pokemonType";
 import { fetchSearchPokemonsName } from "../../../api/PokemonApi";
@@ -10,21 +9,43 @@ import { PokemonContext } from "../../../context/PokemonContext";
 
 export default function SearchBar() {
   const [name, setName] = useState("");
-  const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(null)
-  const {isShiny, setIsShiny} = useContext(PokemonContext)
+  const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
+    null
+  );
+  const { isShiny, setIsShiny } = useContext(PokemonContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {  
+  useEffect(() => {
+    if (name.trim().length < 3) {
+      setResultsApiCall(null);
+      setErrorMessage("");
+      return;
+    }
+
+    setIsLoading(true);
+    setErrorMessage("");
+
     const debounce = setTimeout(() => {
-        if(name.trim() === ""){
-            setResultsApiCall(null);
-            return;
-        }
-        fetchSearchPokemonsName(name, setResultsApiCall)
-      }, 500);
-  
-      return () => clearTimeout(debounce);
-  }, [name])
-  
+      fetchSearchPokemonsName(name, setResultsApiCall)
+        .then(() => {
+          if (
+            !resultsApiCall ||
+            !resultsApiCall.name ||
+            !resultsApiCall.name.fr
+          ) {
+            setErrorMessage("Aucun Pokémon trouvé");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching Pokémon:", error);
+          setErrorMessage("Une erreur s'est produite lors de la recherche.");
+        })
+        .finally(() => setIsLoading(false));
+    }, 500);
+
+    return () => clearTimeout(debounce);
+  }, [name, resultsApiCall]);
 
   return (
     <SearchBarStyled>
@@ -36,34 +57,34 @@ export default function SearchBar() {
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
-        <button type="submit">
-          <FaSearch />
-        </button>
-        
-    <div className="Card-Search-Result">
-        
-        {resultsApiCall ?
-           <CardPokedex
-           key={resultsApiCall.pokedex_id}
-           numero={resultsApiCall.pokedex_id}
-           namePokemon={resultsApiCall.name.fr}
-           src={isShiny ? resultsApiCall.sprites.shiny : resultsApiCall.sprites.regular}
-           alt={resultsApiCall.name.fr}
-           typePokemon={resultsApiCall.types.map((type) => type.image)}
-           IconPokeball={<TbPokeball />}
-           IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
-           onShiny={() => {
-             setIsShiny(!isShiny);
-           }  }
-           onPokeball={() => {}}
-         /> : <p>Aucun Pokemon</p>
-}
-    </div>
+      </div>
+      <div className="Card-Search-Result">
+        {isLoading && <p>Recherche en cours...</p>}
+        {errorMessage && <p>{errorMessage}</p>}
+        {resultsApiCall && resultsApiCall.name && resultsApiCall.name.fr && (
+          <CardPokedex
+            key={resultsApiCall.pokedex_id}
+            numero={resultsApiCall.pokedex_id}
+            namePokemon={resultsApiCall.name.fr}
+            src={
+              isShiny
+                ? resultsApiCall.sprites.shiny
+                : resultsApiCall.sprites.regular
+            }
+            alt={resultsApiCall.name.fr}
+            typePokemon={resultsApiCall.types.map((type) => type.image)}
+            IconPokeball={<TbPokeball />}
+            IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
+            onShiny={() => {
+              setIsShiny(!isShiny);
+            }}
+            onPokeball={() => {}}
+          />
+        )}
       </div>
     </SearchBarStyled>
   );
 }
-
 const SearchBarStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -113,28 +134,17 @@ const SearchBarStyled = styled.div`
     }
   }
 
-  button {
-    width: 35px !important;
-    height: 35px !important;
-    position: absolute;
-    right: 5px;
-    background-color: #a7a7a7;
-    border: none;
-    border-radius: 50%;
-    padding: 8px;
-    cursor: pointer;
+  .Card-Search-Result {
+    margin-top: 20px;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    transition: background-color 0.3s ease;
 
-    svg {
-      color: #fff;
-      font-size: 16px;
-    }
-
-    &:hover {
-      background-color: #444444;
+    p {
+      color: #888;
+      font-size: 18px;
+      margin-top: 20px;
     }
   }
 `;

@@ -13,7 +13,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [generation, setGeneration] = useState(1);
-  const { isShiny, setIsShiny } = useContext(PokemonContext);
+  const { isShiny, setIsShiny, setIsDetailsPokemon } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -44,7 +44,7 @@ export default function Pokedex() {
             onShiny={() => {
               setIsShiny(!isShiny);
             }}
-            onPokeball={() => {}}
+            onPokeball={() => setIsDetailsPokemon(true)}
           />
         ))}
       </div>

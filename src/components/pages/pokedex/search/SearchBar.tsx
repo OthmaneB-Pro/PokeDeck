@@ -91,15 +91,15 @@ const SearchBarStyled = styled.div`
 `;
 
 const CardSearchResultStyled = styled.div`
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    p {
-      color: #888;
-      font-size: 18px;
-      margin-top: 20px;
-    }
-`
+  p {
+    color: #888;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+`;

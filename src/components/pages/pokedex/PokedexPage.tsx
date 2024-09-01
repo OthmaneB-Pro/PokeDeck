@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Pokedex from "./Pokedex";
+import Pokedex from "./pokedexList/Pokedex";
 import Navbar from "./navbar/Navbar";
 import { useState } from "react";
 import { PokemonContext } from "../../../context/PokemonContext";
@@ -10,7 +10,7 @@ export default function PokedexPage() {
   const PokemonContextValue = {
     isShiny,
     setIsShiny,
-  }
+  };
 
   return (
     <PokemonContext.Provider value={PokemonContextValue}>

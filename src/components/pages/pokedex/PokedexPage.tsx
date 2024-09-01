@@ -1,15 +1,26 @@
 import styled from "styled-components";
 import Pokedex from "./Pokedex";
 import Navbar from "./navbar/Navbar";
+import { useState } from "react";
+import { PokemonContext } from "../../../context/PokemonContext";
 
 export default function PokedexPage() {
+  const [isShiny, setIsShiny] = useState(false);
+
+  const PokemonContextValue = {
+    isShiny,
+    setIsShiny,
+  }
+
   return (
-    <PokedexPageStyled>
-      <div className="container-pokemon">
-        <Navbar />
-        <Pokedex />
-      </div>
-    </PokedexPageStyled>
+    <PokemonContext.Provider value={PokemonContextValue}>
+      <PokedexPageStyled>
+        <div className="container-pokemon">
+          <Navbar />
+          <Pokedex />
+        </div>
+      </PokedexPageStyled>
+    </PokemonContext.Provider>
   );
 }
 

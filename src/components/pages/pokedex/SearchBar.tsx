@@ -1,17 +1,22 @@
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PokemonsType } from "../../reusable-type/pokemonType";
 import { fetchSearchPokemonsName } from "../../../api/PokemonApi";
+import CardPokedex from "../../reusable-ui/CardPokedex";
+import { TbPokeball } from "react-icons/tb";
+import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
+import { PokemonContext } from "../../../context/PokemonContext";
 
 export default function SearchBar() {
   const [name, setName] = useState("");
-  const [resultsApiCall, setResultsApiCall] = useState<PokemonsType[]>([])
+  const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(null)
+  const {isShiny, setIsShiny} = useContext(PokemonContext)
 
   useEffect(() => {  
     const debounce = setTimeout(() => {
         if(name.trim() === ""){
-            setResultsApiCall([]);
+            setResultsApiCall(null);
             return;
         }
         fetchSearchPokemonsName(name, setResultsApiCall)
@@ -34,6 +39,26 @@ export default function SearchBar() {
         <button type="submit">
           <FaSearch />
         </button>
+        
+    <div className="Card-Search-Result">
+        
+        {resultsApiCall ?
+           <CardPokedex
+           key={resultsApiCall.pokedex_id}
+           numero={resultsApiCall.pokedex_id}
+           namePokemon={resultsApiCall.name.fr}
+           src={isShiny ? resultsApiCall.sprites.shiny : resultsApiCall.sprites.regular}
+           alt={resultsApiCall.name.fr}
+           typePokemon={resultsApiCall.types.map((type) => type.image)}
+           IconPokeball={<TbPokeball />}
+           IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
+           onShiny={() => {
+             setIsShiny(!isShiny);
+           }  }
+           onPokeball={() => {}}
+         /> : <p>Aucun Pokemon</p>
+}
+    </div>
       </div>
     </SearchBarStyled>
   );
@@ -89,8 +114,8 @@ const SearchBarStyled = styled.div`
   }
 
   button {
-    width: 35px;
-    height: 35px;
+    width: 35px !important;
+    height: 35px !important;
     position: absolute;
     right: 5px;
     background-color: #a7a7a7;

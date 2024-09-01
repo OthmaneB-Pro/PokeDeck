@@ -7,7 +7,7 @@ import { PokemonsType } from "../../reusable-type/pokemonType";
 import { fetchPokemons } from "../../../api/PokemonApi";
 import GenerationPokemon from "./pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
-import SearchBar from "./SearchBar";
+import SearchBar from "./search/SearchBar";
 import { PokemonContext } from "../../../context/PokemonContext";
 
 export default function Pokedex() {

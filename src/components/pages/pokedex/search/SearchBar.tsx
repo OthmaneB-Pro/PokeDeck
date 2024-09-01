@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
-import { PokemonsType } from "../../reusable-type/pokemonType";
-import { fetchSearchPokemonsName } from "../../../api/PokemonApi";
-import CardPokedex from "../../reusable-ui/CardPokedex";
+import { PokemonsType } from "../../../reusable-type/pokemonType";
+import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
+import CardPokedex from "../../../reusable-ui/CardPokedex";
 import { TbPokeball } from "react-icons/tb";
 import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
-import { PokemonContext } from "../../../context/PokemonContext";
+import { PokemonContext } from "../../../../context/PokemonContext";
+import InputSearch from "./InputSearch";
 
 export default function SearchBar() {
   const [name, setName] = useState("");
@@ -49,16 +50,9 @@ export default function SearchBar() {
 
   return (
     <SearchBarStyled>
-      <h3>Faites votre recherche :</h3>
-      <div className="search-container">
-        <input
-          type="search"
-          placeholder="Recherchez votre Pokémon"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-      </div>
-      <div className="Card-Search-Result">
+      <InputSearch name={name} setName={setName} />
+
+      <CardSearchResultStyled>
         {isLoading && <p>Recherche en cours...</p>}
         {errorMessage && <p>{errorMessage}</p>}
         {resultsApiCall && resultsApiCall.name && resultsApiCall.name.fr && (
@@ -81,7 +75,7 @@ export default function SearchBar() {
             onPokeball={() => {}}
           />
         )}
-      </div>
+      </CardSearchResultStyled>
     </SearchBarStyled>
   );
 }
@@ -94,47 +88,9 @@ const SearchBarStyled = styled.div`
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+`;
 
-  h3 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .search-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-  }
-
-  input {
-    width: 100%;
-    height: 45px;
-    padding: 0 15px;
-    padding-right: 50px;
-    border-radius: 25px;
-    border: 2px solid #ddd;
-    background-color: #fff;
-    font-size: 16px;
-    color: #555;
-    transition: all 0.3s ease-in-out;
-
-    &:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    }
-
-    &::placeholder {
-      color: #aaa;
-      font-style: italic;
-    }
-  }
-
-  .Card-Search-Result {
+const CardSearchResultStyled = styled.div`
     margin-top: 20px;
     width: 100%;
     display: flex;
@@ -146,5 +102,4 @@ const SearchBarStyled = styled.div`
       font-size: 18px;
       margin-top: 20px;
     }
-  }
-`;
+`

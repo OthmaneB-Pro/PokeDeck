@@ -3,13 +3,17 @@ import Pokedex from "./pokedexList/Pokedex";
 import Navbar from "./navbar/Navbar";
 import { useState } from "react";
 import { PokemonContext } from "../../../context/PokemonContext";
+import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
 
 export default function PokedexPage() {
   const [isShiny, setIsShiny] = useState(false);
+  const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
 
   const PokemonContextValue = {
     isShiny,
     setIsShiny,
+    isDetailsPokemon,
+    setIsDetailsPokemon,
   };
 
   return (
@@ -18,6 +22,7 @@ export default function PokedexPage() {
         <div className="container-pokemon">
           <Navbar />
           <Pokedex />
+          {isDetailsPokemon && <DetailsPokemon/>}
         </div>
       </PokedexPageStyled>
     </PokemonContext.Provider>

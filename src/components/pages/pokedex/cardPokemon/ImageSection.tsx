@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function ImageSection({ src, alt }: any) {
   return (
     <ImageWrapper>
-      <img src={src} alt={alt} />
+    <img src={src} alt={alt} />
     </ImageWrapper>
   );
 }
@@ -16,7 +16,7 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   img {
-    width: 70%;
+    width: 75%;
     height: auto;
     object-fit: cover;
   }

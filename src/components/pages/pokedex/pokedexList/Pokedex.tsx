@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import CardPokedex from "../../../reusable-ui/CardPokedex";
 import { TbPokeball } from "react-icons/tb";
 import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
-import { PokemonsType } from "../../../reusable-type/pokemonType";
 import { fetchPokemons } from "../../../../api/PokemonApi";
 import GenerationPokemon from "./../pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
@@ -11,9 +10,8 @@ import SearchBar from "./../search/SearchBar";
 import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
-  const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [generation, setGeneration] = useState(1);
-  const { isShiny, setIsShiny, setIsDetailsPokemon } = useContext(PokemonContext);
+  const { isShiny, setIsShiny, setIsDetailsPokemon, pokemons, setPokemons } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);

@@ -20,8 +20,8 @@ export default function PokedexPage() {
     <PokemonContext.Provider value={PokemonContextValue}>
       <PokedexPageStyled>
         <div className="container-pokemon">
+        {isDetailsPokemon && <DetailsPokemon/>}
           <Navbar />
-          {isDetailsPokemon && <DetailsPokemon/>}
           <Pokedex />
         </div>
       </PokedexPageStyled>

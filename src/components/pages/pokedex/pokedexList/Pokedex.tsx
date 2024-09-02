@@ -45,6 +45,7 @@ export default function Pokedex() {
               setIsShiny(!isShiny);
             }}
             onPokeball={() => setIsDetailsPokemon(true)}
+            onDetails={() => setIsDetailsPokemon(true)}
           />
         ))}
       </div>

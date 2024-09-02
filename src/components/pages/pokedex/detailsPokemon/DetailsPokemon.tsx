@@ -7,7 +7,15 @@ export default function DetailsPokemon() {
 }
 
 const DetailsPokemonStyled = styled.div`
+position: fixed;
+margin-left: 200px;
+margin-bottom: 300px;
     background-color: pink;
-    height: 300px;
+    width: 720px;
+    height: 600px;
     z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
 `

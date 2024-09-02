@@ -13,9 +13,10 @@ export default function CardPokedex({
   IconShiny,
   onShiny,
   onPokeball,
+  onDetails,
 }: CardPokedexType) {
   return (
-    <CardPokedexStyled>
+    <CardPokedexStyled onClick={onDetails}>
       <div className="image">
         <ImageSection src={src} alt={alt} />
         <div className="button-pokemon">
@@ -40,6 +41,7 @@ const CardPokedexStyled = styled.div`
   background-color: #ffffff;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-10px);

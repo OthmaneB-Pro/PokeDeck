@@ -32,4 +32,5 @@ export type CardPokedexType = {
   IconShiny: JSX.Element;
   onShiny: () => void;
   onPokeball: () => void;
+  onDetails: () => void;
 };

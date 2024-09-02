@@ -13,7 +13,7 @@ export default function SearchBar() {
   const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
     null
   );
-  const { isShiny, setIsShiny } = useContext(PokemonContext);
+  const { isShiny, setIsShiny, setIsDetailsPokemon } = useContext(PokemonContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -73,6 +73,7 @@ export default function SearchBar() {
               setIsShiny(!isShiny);
             }}
             onPokeball={() => {}}
+            onDetails={() => setIsDetailsPokemon(true)}
           />
         )}
       </CardSearchResultStyled>

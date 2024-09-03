@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function DetailsPokemon() {
-    const {setIsDetailsPokemon, pokemons} = useContext(PokemonContext)
-  return (
+    const {setIsDetailsPokemon, pokemons, pokemonId} = useContext(PokemonContext)
+
+    return (
     <>
       <Overlay />
       <DetailsPokemonStyled>
-        <p>{pokemons[0].pokedex_id}</p>{/* Recuperation par le 0 du pokemon, ca veut dire il faut que le 0 soit dynamique par rapport a ce qu'on click et ensuite on met les valeurs par rapport a l'id et l'api */}
+        <p>{pokemons[pokemonId].name.fr}</p>{/* Recuperation par le 0 du pokemon, ca veut dire il faut que le 0 soit dynamique par rapport a ce qu'on click et ensuite on met les valeurs par rapport a l'id et l'api */}
         <button onClick={() => setIsDetailsPokemon(false)}>Close</button>
       </DetailsPokemonStyled>
     </>

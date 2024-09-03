@@ -11,7 +11,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
-  const { isShiny, setIsShiny, setIsDetailsPokemon, pokemons, setPokemons } = useContext(PokemonContext);
+  const { isShiny, setIsShiny, setIsDetailsPokemon, pokemons, setPokemons, setPokemonId } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -22,6 +22,11 @@ export default function Pokedex() {
     setGeneration(selectedGeneration);
     fetchPokemons(selectedGeneration, setPokemons);
   };
+
+  const handleDetails = (idPokemon : number) => {
+    setIsDetailsPokemon(true)
+    setPokemonId(idPokemon - 1)
+  }
 
   return (
     <PokedexStyled>
@@ -43,7 +48,7 @@ export default function Pokedex() {
               setIsShiny(!isShiny);
             }}
             onPokeball={() => setIsDetailsPokemon(true)}
-            onDetails={() => setIsDetailsPokemon(true)}
+            onDetails= {() => handleDetails(pokemon.pokedex_id)}
           />
         ))}
       </div>

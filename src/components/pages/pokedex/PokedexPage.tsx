@@ -10,6 +10,7 @@ export default function PokedexPage() {
   const [isShiny, setIsShiny] = useState(false);
   const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
+  const [pokemonId, setPokemonId] = useState(0);
 
   const PokemonContextValue = {
     isShiny,
@@ -18,6 +19,8 @@ export default function PokedexPage() {
     setIsDetailsPokemon,
     pokemons,
     setPokemons,
+    pokemonId,
+    setPokemonId,
   };
 
   return (

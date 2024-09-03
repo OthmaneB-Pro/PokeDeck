@@ -16,7 +16,7 @@ export default function CardPokedex({
   onDetails,
 }: CardPokedexType) {
   return (
-    <CardPokedexStyled onClick={onDetails}>
+    <CardPokedexStyled onClick={() => onDetails(numero)}>
       <div className="image">
         <ImageSection src={src} alt={alt} />
         <div className="button-pokemon">

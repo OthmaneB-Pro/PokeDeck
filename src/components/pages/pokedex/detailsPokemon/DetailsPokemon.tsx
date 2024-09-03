@@ -10,12 +10,11 @@ export default function DetailsPokemon() {
     useContext(PokemonContext);
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
-  const PokemonName =  removeAccents(pokemons[pokemonId].name.fr);
+  const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
-    console.log(PokemonName)
-
+    console.log(PokemonName);
   }, [PokemonName]);
 
   return (
@@ -24,11 +23,16 @@ export default function DetailsPokemon() {
       <DetailsPokemonStyled>
         {resultsApiCallWithName && resultsApiCallWithName ? (
           <>
+            <img
+              src={resultsApiCallWithName.sprites.regular}
+              alt={`${resultsApiCallWithName.name.fr}`}
+            />
             <p>{resultsApiCallWithName.pokedex_id}</p>
             <p>{resultsApiCallWithName.name.fr}</p>
-            <img src={resultsApiCallWithName.sprites.regular} alt={`${resultsApiCallWithName.name.fr}`} />
           </>
-        ) : "Chargement en cours..."}
+        ) : (
+          "Chargement en cours..."
+        )}
         <button onClick={() => setIsDetailsPokemon(false)}>Close</button>
       </DetailsPokemonStyled>
     </>
@@ -56,4 +60,8 @@ const DetailsPokemonStyled = styled.div`
   padding: 20px;
   border: 1px solid black;
   border-radius: 15px;
+
+  img {
+    width: 200px;
+  }
 `;

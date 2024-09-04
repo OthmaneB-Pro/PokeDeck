@@ -23,10 +23,18 @@ export default function DetailsPokemon() {
       <DetailsPokemonStyled>
         {resultsApiCallWithName && resultsApiCallWithName ? (
           <>
+          <div className="stats-pokemon">
             <img
               src={resultsApiCallWithName.sprites.regular}
               alt={`${resultsApiCallWithName.name.fr}`}
             />
+            <p>{resultsApiCallWithName.stats.hp} hp</p>
+            <p>{resultsApiCallWithName.stats.atk} atk</p>
+            <p>{resultsApiCallWithName.stats.def} def</p>
+            <p>{resultsApiCallWithName.stats.spe_atk} spe_atk</p>
+            <p>{resultsApiCallWithName.stats.spe_def} spe_def</p>
+            <p>{resultsApiCallWithName.stats.vit} vit</p>
+          </div>
             <p>{resultsApiCallWithName.pokedex_id}</p>
             <p>{resultsApiCallWithName.name.fr}</p>
           </>
@@ -64,4 +72,5 @@ const DetailsPokemonStyled = styled.div`
   img {
     width: 200px;
   }
+ 
 `;

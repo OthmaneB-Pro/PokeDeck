@@ -4,6 +4,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
 import { PokemonsType } from "../../../reusable-type/pokemonType";
 import { removeAccents } from "../../../../utils/functionPokemon";
+import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
 
 export default function DetailsPokemon() {
   const { setIsDetailsPokemon, pokemons, pokemonId } =
@@ -11,6 +12,7 @@ export default function DetailsPokemon() {
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
   const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
+  const [isRegular, setIsRegular] = useState(true);
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
@@ -21,27 +23,40 @@ export default function DetailsPokemon() {
     <>
       <Overlay />
       <DetailsPokemonStyled>
-        {resultsApiCallWithName && resultsApiCallWithName ? (
+        {resultsApiCallWithName ? (
           <>
-          <div className="stats-pokemon">
-            <img
-              src={resultsApiCallWithName.sprites.regular}
+            <PokemonImage
+              src={
+                isRegular
+                  ? resultsApiCallWithName.sprites.regular
+                  : resultsApiCallWithName.sprites.shiny
+              }
               alt={`${resultsApiCallWithName.name.fr}`}
             />
-            <p>{resultsApiCallWithName.stats.hp} hp</p>
-            <p>{resultsApiCallWithName.stats.atk} atk</p>
-            <p>{resultsApiCallWithName.stats.def} def</p>
-            <p>{resultsApiCallWithName.stats.spe_atk} spe_atk</p>
-            <p>{resultsApiCallWithName.stats.spe_def} spe_def</p>
-            <p>{resultsApiCallWithName.stats.vit} vit</p>
-          </div>
-            <p>{resultsApiCallWithName.pokedex_id}</p>
-            <p>{resultsApiCallWithName.name.fr}</p>
+            <PokemonNameStyled>{resultsApiCallWithName.name.fr}</PokemonNameStyled>
+            <ToggleButton onClick={() => setIsRegular(!isRegular)}>
+              {isRegular ? <PiPokerChip /> : <PiPokerChipFill />}
+            </ToggleButton>
+            <Stats>
+              <p>HP: {resultsApiCallWithName.stats.hp}</p>
+              <p>ATK: {resultsApiCallWithName.stats.atk}</p>
+              <p>DEF: {resultsApiCallWithName.stats.def}</p>
+              <p>Sp. ATK: {resultsApiCallWithName.stats.spe_atk}</p>
+              <p>Sp. DEF: {resultsApiCallWithName.stats.spe_def}</p>
+              <p>VIT: {resultsApiCallWithName.stats.vit}</p>
+              <p>Taille: {resultsApiCallWithName.height}</p>
+              <p>Poids: {resultsApiCallWithName.weight}</p>
+            </Stats>
+            <Types>
+              {resultsApiCallWithName.types.map((img, index) => (
+                <TypeImage key={index} src={img.image} alt={img.name} />
+              ))}
+            </Types>
           </>
         ) : (
-          "Chargement en cours..."
+          <Loading>Chargement en cours...</Loading>
         )}
-        <button onClick={() => setIsDetailsPokemon(false)}>Close</button>
+        <CloseButton onClick={() => setIsDetailsPokemon(false)}>Close</CloseButton>
       </DetailsPokemonStyled>
     </>
   );
@@ -59,18 +74,109 @@ const Overlay = styled.div`
 
 const DetailsPokemonStyled = styled.div`
   position: fixed;
-  margin-left: 200px;
-  margin-bottom: 300px;
-  background-color: white;
-  width: 720px;
-  height: 650px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  width: 700px;
+  height: auto;
+  max-height: 90vh;
+  overflow-y: auto;
   z-index: 1000;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 15px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const PokemonImage = styled.img`
+  width: 250px;
+  margin-bottom: 10px;
+`;
+
+const PokemonNameStyled = styled.h2`
+  font-size: 28px;
+  margin: 10px 0;
+  color: #333;
+  text-align: center;
+`;
+
+const ToggleButton = styled.button`
+  background-color: #ffcc01;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+const Stats = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+
+  p {
+    flex: 1 1 45%;
+    margin: 10px 0;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+`;
+
+const Types = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 
   img {
-    width: 200px;
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
   }
- 
+`;
+
+const TypeImage = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
+const Loading = styled.p`
+  font-size: 20px;
+  color: #666;
+`;
+
+const CloseButton = styled.button`
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #ff4a4a;
+  }
 `;

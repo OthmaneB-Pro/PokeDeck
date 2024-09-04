@@ -5,6 +5,9 @@ import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
 import { PokemonsType } from "../../../reusable-type/pokemonType";
 import { removeAccents } from "../../../../utils/functionPokemon";
 import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
+import Loading from "./Loading";
+import Overlay from "./Overlay";
+import CloseButton from "./CloseButton";
 
 export default function DetailsPokemon() {
   const { setIsDetailsPokemon, pokemons, pokemonId } =
@@ -16,7 +19,6 @@ export default function DetailsPokemon() {
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
-    console.log(PokemonName);
   }, [PokemonName]);
 
   return (
@@ -54,23 +56,13 @@ export default function DetailsPokemon() {
             </Types>
           </>
         ) : (
-          <Loading>Chargement en cours...</Loading>
+          <Loading/>
         )}
-        <CloseButton onClick={() => setIsDetailsPokemon(false)}>Close</CloseButton>
+        <CloseButton onClick={() => setIsDetailsPokemon(false)} label="Close" />
       </DetailsPokemonStyled>
     </>
   );
 }
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-`;
 
 const DetailsPokemonStyled = styled.div`
   position: fixed;
@@ -159,24 +151,4 @@ const Types = styled.div`
 const TypeImage = styled.img`
   width: 50px;
   height: 50px;
-`;
-
-const Loading = styled.p`
-  font-size: 20px;
-  color: #666;
-`;
-
-const CloseButton = styled.button`
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-
-  &:hover {
-    background-color: #ff4a4a;
-  }
 `;

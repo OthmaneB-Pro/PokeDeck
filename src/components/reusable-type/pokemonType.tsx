@@ -15,6 +15,16 @@ export type PokemonsType = {
       image: string;
     }
   ];
+  stats: {
+    hp: number;
+    atk: number;
+    def: number;
+    spe_atk: number;
+    spe_def: number;
+    vit: number;
+  };
+  height: number;
+  weight: number;
 };
 
 export type GenerationPokemonType = {
@@ -28,8 +38,5 @@ export type CardPokedexType = {
   numero: number;
   namePokemon: string;
   typePokemon: string[];
-  IconPokeball: JSX.Element;
-  IconShiny: JSX.Element;
-  onShiny: () => void;
-  onPokeball: () => void;
+  onDetails: (id: number) => void;
 };

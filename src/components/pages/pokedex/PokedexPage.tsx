@@ -3,19 +3,28 @@ import Pokedex from "./pokedexList/Pokedex";
 import Navbar from "./navbar/Navbar";
 import { useState } from "react";
 import { PokemonContext } from "../../../context/PokemonContext";
+import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
+import { PokemonsType } from "../../reusable-type/pokemonType";
 
 export default function PokedexPage() {
-  const [isShiny, setIsShiny] = useState(false);
+  const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
+  const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
+  const [pokemonId, setPokemonId] = useState(0);
 
   const PokemonContextValue = {
-    isShiny,
-    setIsShiny,
+    isDetailsPokemon,
+    setIsDetailsPokemon,
+    pokemons,
+    setPokemons,
+    pokemonId,
+    setPokemonId,
   };
 
   return (
     <PokemonContext.Provider value={PokemonContextValue}>
       <PokedexPageStyled>
         <div className="container-pokemon">
+          {isDetailsPokemon && <DetailsPokemon />}
           <Navbar />
           <Pokedex />
         </div>

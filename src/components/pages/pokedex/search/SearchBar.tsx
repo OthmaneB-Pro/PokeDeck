@@ -3,8 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { PokemonsType } from "../../../reusable-type/pokemonType";
 import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
 import CardPokedex from "../../../reusable-ui/CardPokedex";
-import { TbPokeball } from "react-icons/tb";
-import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
 import { PokemonContext } from "../../../../context/PokemonContext";
 import InputSearch from "./InputSearch";
 
@@ -13,7 +11,7 @@ export default function SearchBar() {
   const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
     null
   );
-  const { isShiny, setIsShiny } = useContext(PokemonContext);
+  const { setIsDetailsPokemon, setPokemonId } = useContext(PokemonContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -48,6 +46,11 @@ export default function SearchBar() {
     return () => clearTimeout(debounce);
   }, [name, resultsApiCall]);
 
+  const handleDetails = (idPokemon: number) => {
+    setIsDetailsPokemon(true);
+    setPokemonId(idPokemon - 1);
+  };
+
   return (
     <SearchBarStyled>
       <InputSearch name={name} setName={setName} />
@@ -60,19 +63,10 @@ export default function SearchBar() {
             key={resultsApiCall.pokedex_id}
             numero={resultsApiCall.pokedex_id}
             namePokemon={resultsApiCall.name.fr}
-            src={
-              isShiny
-                ? resultsApiCall.sprites.shiny
-                : resultsApiCall.sprites.regular
-            }
+            src={resultsApiCall.sprites.regular}
             alt={resultsApiCall.name.fr}
             typePokemon={resultsApiCall.types.map((type) => type.image)}
-            IconPokeball={<TbPokeball />}
-            IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
-            onShiny={() => {
-              setIsShiny(!isShiny);
-            }}
-            onPokeball={() => {}}
+            onDetails={() => handleDetails(resultsApiCall.pokedex_id)}
           />
         )}
       </CardSearchResultStyled>

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import CardPokedex from "../../../reusable-ui/CardPokedex";
-import { TbPokeball } from "react-icons/tb";
-import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
 import { fetchPokemons } from "../../../../api/PokemonApi";
 import GenerationPokemon from "./../pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
@@ -11,11 +9,17 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
-  const { isShiny, setIsShiny, setIsDetailsPokemon, pokemons, setPokemons, setPokemonId } = useContext(PokemonContext);
+  const {
+    isShiny,
+    setIsDetailsPokemon,
+    pokemons,
+    setPokemons,
+    setPokemonId,
+  } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
-  }, [generation]);
+  }, [generation, setPokemons]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGeneration = parseInt(event.target.value);
@@ -23,11 +27,11 @@ export default function Pokedex() {
     fetchPokemons(selectedGeneration, setPokemons);
   };
 
-  const handleDetails = (idPokemon : number) => {
-    setIsDetailsPokemon(true)
-    setPokemonId(idPokemon - 1)
-    console.log("IdPokemon" ,idPokemon)
-  }
+  const handleDetails = (idPokemon: number) => {
+    setIsDetailsPokemon(true);
+    setPokemonId(idPokemon - 1);
+    console.log("IdPokemon", idPokemon);
+  };
 
   return (
     <PokedexStyled>
@@ -43,13 +47,7 @@ export default function Pokedex() {
             src={isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular}
             alt={pokemon.name.fr}
             typePokemon={pokemon.types.map((type) => type.image)}
-            IconPokeball={<TbPokeball />}
-            IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
-            onShiny={() => {
-              setIsShiny(!isShiny);
-            }}
-            onPokeball={() => setIsDetailsPokemon(true)}
-            onDetails= {() => handleDetails(pokemon.pokedex_id)}
+            onDetails={() => handleDetails(pokemon.pokedex_id)}
           />
         ))}
       </div>

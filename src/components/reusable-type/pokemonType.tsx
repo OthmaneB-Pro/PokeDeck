@@ -38,9 +38,5 @@ export type CardPokedexType = {
   numero: number;
   namePokemon: string;
   typePokemon: string[];
-  IconPokeball: JSX.Element;
-  IconShiny: JSX.Element;
-  onShiny: () => void;
-  onPokeball: () => void;
   onDetails: (id: number) => void;
 };

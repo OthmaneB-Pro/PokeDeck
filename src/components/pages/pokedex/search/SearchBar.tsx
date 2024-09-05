@@ -3,8 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { PokemonsType } from "../../../reusable-type/pokemonType";
 import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
 import CardPokedex from "../../../reusable-ui/CardPokedex";
-import { TbPokeball } from "react-icons/tb";
-import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
 import { PokemonContext } from "../../../../context/PokemonContext";
 import InputSearch from "./InputSearch";
 
@@ -13,7 +11,7 @@ export default function SearchBar() {
   const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
     null
   );
-  const { isShiny, setIsShiny, setIsDetailsPokemon } = useContext(PokemonContext);
+  const { isShiny, setIsDetailsPokemon } = useContext(PokemonContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -67,12 +65,6 @@ export default function SearchBar() {
             }
             alt={resultsApiCall.name.fr}
             typePokemon={resultsApiCall.types.map((type) => type.image)}
-            IconPokeball={<TbPokeball />}
-            IconShiny={isShiny ? <PiPokerChipFill /> : <PiPokerChip />}
-            onShiny={() => {
-              setIsShiny(!isShiny);
-            }}
-            onPokeball={() => {}}
             onDetails={() => setIsDetailsPokemon(true)}
           />
         )}

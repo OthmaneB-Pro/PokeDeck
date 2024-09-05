@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export default function Loading() {
-  return (
-    <LoadingStyled>Chargement en cours...</LoadingStyled>
-  )
+  return <LoadingStyled>Chargement en cours...</LoadingStyled>;
 }
 
 const LoadingStyled = styled.p`

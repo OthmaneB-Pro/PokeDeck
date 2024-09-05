@@ -1,14 +1,8 @@
 import styled from "styled-components";
+import { CloseButtonType } from "./typeComponents";
 
-type CloseButtonType = {
-    onClick : () => void;
-    label : string;
-}
-
-export default function CloseButton({onClick, label} : CloseButtonType) {
-  return (
-    <CloseButtonStyled onClick={onClick}>{label}</CloseButtonStyled>
-  )
+export default function CloseButton({ onClick, label }: CloseButtonType) {
+  return <CloseButtonStyled onClick={onClick}>{label}</CloseButtonStyled>;
 }
 
 const CloseButtonStyled = styled.button`

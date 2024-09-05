@@ -11,7 +11,7 @@ export default function SearchBar() {
   const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
     null
   );
-  const { setIsDetailsPokemon } = useContext(PokemonContext);
+  const { setIsDetailsPokemon, setPokemonId } = useContext(PokemonContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -46,6 +46,11 @@ export default function SearchBar() {
     return () => clearTimeout(debounce);
   }, [name, resultsApiCall]);
 
+  const handleDetails = (idPokemon: number) => {
+    setIsDetailsPokemon(true);
+    setPokemonId(idPokemon - 1);
+  };
+
   return (
     <SearchBarStyled>
       <InputSearch name={name} setName={setName} />
@@ -61,7 +66,7 @@ export default function SearchBar() {
             src={resultsApiCall.sprites.regular}
             alt={resultsApiCall.name.fr}
             typePokemon={resultsApiCall.types.map((type) => type.image)}
-            onDetails={() => setIsDetailsPokemon(true)}
+            onDetails={() => handleDetails(resultsApiCall.pokedex_id)}
           />
         )}
       </CardSearchResultStyled>

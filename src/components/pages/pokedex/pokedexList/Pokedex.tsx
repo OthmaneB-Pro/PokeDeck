@@ -25,7 +25,6 @@ export default function Pokedex() {
   const handleDetails = (idPokemon: number) => {
     setIsDetailsPokemon(true);
     setPokemonId(idPokemon - 1);
-    console.log("IdPokemon", idPokemon);
   };
 
   return (

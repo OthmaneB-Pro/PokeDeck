@@ -7,14 +7,11 @@ import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
 import { PokemonsType } from "../../reusable-type/pokemonType";
 
 export default function PokedexPage() {
-  const [isShiny, setIsShiny] = useState(false);
   const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [pokemonId, setPokemonId] = useState(0);
 
   const PokemonContextValue = {
-    isShiny,
-    setIsShiny,
     isDetailsPokemon,
     setIsDetailsPokemon,
     pokemons,

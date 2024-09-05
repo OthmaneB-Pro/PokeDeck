@@ -9,13 +9,8 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
-  const {
-    isShiny,
-    setIsDetailsPokemon,
-    pokemons,
-    setPokemons,
-    setPokemonId,
-  } = useContext(PokemonContext);
+  const { setIsDetailsPokemon, pokemons, setPokemons, setPokemonId } =
+    useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -44,7 +39,7 @@ export default function Pokedex() {
             key={pokemon.pokedex_id}
             numero={pokemon.pokedex_id}
             namePokemon={pokemon.name.fr}
-            src={isShiny ? pokemon.sprites.shiny : pokemon.sprites.regular}
+            src={pokemon.sprites.regular}
             alt={pokemon.name.fr}
             typePokemon={pokemon.types.map((type) => type.image)}
             onDetails={() => handleDetails(pokemon.pokedex_id)}

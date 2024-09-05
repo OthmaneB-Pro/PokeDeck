@@ -11,7 +11,7 @@ export default function SearchBar() {
   const [resultsApiCall, setResultsApiCall] = useState<PokemonsType | null>(
     null
   );
-  const { isShiny, setIsDetailsPokemon } = useContext(PokemonContext);
+  const { setIsDetailsPokemon } = useContext(PokemonContext);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -58,11 +58,7 @@ export default function SearchBar() {
             key={resultsApiCall.pokedex_id}
             numero={resultsApiCall.pokedex_id}
             namePokemon={resultsApiCall.name.fr}
-            src={
-              isShiny
-                ? resultsApiCall.sprites.shiny
-                : resultsApiCall.sprites.regular
-            }
+            src={resultsApiCall.sprites.regular}
             alt={resultsApiCall.name.fr}
             typePokemon={resultsApiCall.types.map((type) => type.image)}
             onDetails={() => setIsDetailsPokemon(true)}

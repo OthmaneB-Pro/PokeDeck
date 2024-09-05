@@ -35,7 +35,9 @@ export default function DetailsPokemon() {
               }
               alt={`${resultsApiCallWithName.name.fr}`}
             />
-            <PokemonNameStyled>{resultsApiCallWithName.name.fr}</PokemonNameStyled>
+            <PokemonNameStyled>
+              {resultsApiCallWithName.name.fr}
+            </PokemonNameStyled>
             <ToggleButton onClick={() => setIsRegular(!isRegular)}>
               {isRegular ? <PiPokerChip /> : <PiPokerChipFill />}
             </ToggleButton>
@@ -56,7 +58,7 @@ export default function DetailsPokemon() {
             </Types>
           </>
         ) : (
-          <Loading/>
+          <Loading />
         )}
         <CloseButton onClick={() => setIsDetailsPokemon(false)} label="Close" />
       </DetailsPokemonStyled>

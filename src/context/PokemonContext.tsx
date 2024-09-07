@@ -9,7 +9,7 @@ type PokemonContextType = {
   pokemonId: number;
   setPokemonId: React.Dispatch<React.SetStateAction<number>>;
   isMyPokedex: boolean;
-  setisMyPokedex: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsMyPokedex: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PokemonContext = createContext<PokemonContextType>({
@@ -20,5 +20,5 @@ export const PokemonContext = createContext<PokemonContextType>({
   pokemonId: 0,
   setPokemonId: () => {},
   isMyPokedex: false,
-  setisMyPokedex: () => {},
+  setIsMyPokedex: () => {},
 });

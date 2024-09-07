@@ -9,7 +9,7 @@ import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
 
 export default function PokedexPage() {
   const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
-  const [isMyPokedex, setisMyPokedex] = useState(false);
+  const [isMyPokedex, setIsMyPokedex] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [pokemonId, setPokemonId] = useState(0);
 
@@ -21,7 +21,7 @@ export default function PokedexPage() {
     pokemonId,
     setPokemonId,
     isMyPokedex,
-    setisMyPokedex,
+    setIsMyPokedex,
   };
 
   return (

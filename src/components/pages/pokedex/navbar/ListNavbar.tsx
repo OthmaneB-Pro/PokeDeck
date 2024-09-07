@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function ListNavbar() {
   const { username } = useParams();
+  const {setIsMyPokedex} = useContext(PokemonContext)
 
   return (
     <ListNavbarStyled>
@@ -10,8 +13,8 @@ export default function ListNavbar() {
         <li>
           <a href="/">Déconnexion</a>
         </li>
-        <li>
-          <a href="/">Votre Pokedex {username}</a>
+        <li onClick={()=> setIsMyPokedex(true)}>
+         <span>Votre Pokedex {username}</span> 
         </li>
       </ul>
     </ListNavbarStyled>
@@ -26,7 +29,9 @@ const ListNavbarStyled = styled.nav`
       list-style: none;
       font-size: 18px;
       font-weight: 700;
-      a {
+      cursor: pointer;
+
+      span, a {
         text-decoration: none;
         color: black;
         position: relative;
@@ -35,28 +40,9 @@ const ListNavbarStyled = styled.nav`
         transition: color 0.3s ease;
       }
 
-      a::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        display: block;
-        margin-top: 5px;
-        right: 0;
-        background: #c2c2c2;
-        transition: width 0.3s ease;
-        -webkit-transition: width 0.3s ease;
-      }
-
-      a:hover::after {
-        width: 100%;
-        left: 0;
-        background: #c2c2c2;
-      }
-
-      a:hover {
-        color: #333;
-        transform: translateY(-5px);
+      span:hover, a:hover {
+        color: #ff6b6b;
+        transform: translateY(-3px);
       }
     }
   }

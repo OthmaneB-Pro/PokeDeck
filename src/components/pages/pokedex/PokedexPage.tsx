@@ -5,9 +5,11 @@ import { useState } from "react";
 import { PokemonContext } from "../../../context/PokemonContext";
 import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
 import { PokemonsType } from "../../reusable-type/pokemonType";
+import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
 
 export default function PokedexPage() {
   const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
+  const [isMyPokedex, setisMyPokedex] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [pokemonId, setPokemonId] = useState(0);
 
@@ -18,6 +20,8 @@ export default function PokedexPage() {
     setPokemons,
     pokemonId,
     setPokemonId,
+    isMyPokedex,
+    setisMyPokedex,
   };
 
   return (
@@ -25,6 +29,7 @@ export default function PokedexPage() {
       <PokedexPageStyled>
         <div className="container-pokemon">
           {isDetailsPokemon && <DetailsPokemon />}
+          {isMyPokedex && <MyPokedexPage />}
           <Navbar />
           <Pokedex />
         </div>

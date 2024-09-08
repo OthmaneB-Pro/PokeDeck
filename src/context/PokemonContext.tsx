@@ -11,6 +11,8 @@ type PokemonContextType = {
   isMyPokedex: boolean;
   setIsMyPokedex: React.Dispatch<React.SetStateAction<boolean>>;
   onAddFavorite: (NewFavorite: PokemonsType) => void;
+  myPokedex: PokemonsType[];
+  setMyPokedex: React.Dispatch<React.SetStateAction<PokemonsType[]>>;
 };
 
 export const PokemonContext = createContext<PokemonContextType>({
@@ -23,4 +25,6 @@ export const PokemonContext = createContext<PokemonContextType>({
   isMyPokedex: false,
   setIsMyPokedex: () => {},
   onAddFavorite: () => {},
+  myPokedex: [],
+  setMyPokedex: () => {},
 });

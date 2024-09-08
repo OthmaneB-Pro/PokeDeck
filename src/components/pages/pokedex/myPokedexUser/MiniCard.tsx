@@ -4,11 +4,12 @@ type MiniCardType = {
   src: string;
   alt: string;
   label: string;
+  onDetails : () => void;
 };
 
-export default function MiniCard({ src, alt, label }: MiniCardType) {
+export default function MiniCard({ src, alt, label, onDetails }: MiniCardType) {
   return (
-    <MiniCardStyled>
+    <MiniCardStyled onClick={onDetails}>
       <img src={src} alt={alt} />
       <h3>{label}</h3>
     </MiniCardStyled>

@@ -27,10 +27,10 @@ export default function DetailsPokemon() {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
   }, [PokemonName]);
 
-  const handleAddFavorite = (resultsApiCallWithName : PokemonsType) => {
-    setIsFavorite(!isFavorite)
-    onAddFavorite(resultsApiCallWithName)
-  }
+  const handleAddFavorite = (resultsApiCallWithName: PokemonsType) => {
+    setIsFavorite(!isFavorite);
+    onAddFavorite(resultsApiCallWithName);
+  };
 
   return (
     <>
@@ -79,7 +79,7 @@ const DetailsPokemonStyled = styled.div`
   height: auto;
   max-height: 90vh;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1001;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);

@@ -6,15 +6,29 @@ import styled from "styled-components";
 import MiniCard from "./MiniCard";
 
 export default function MyPokedexPage() {
-  const { setIsMyPokedex, myPokedex } = useContext(PokemonContext);
+  const { setIsMyPokedex, myPokedex, setIsDetailsPokemon, setPokemonId } =
+    useContext(PokemonContext);
+
+  const handleDetails = (idPokemon: number) => {
+    setIsDetailsPokemon(true);
+    setPokemonId(idPokemon - 1);
+  };
   return (
     <>
       <Overlay />
       <MyPokedexStyled>
         <div className="card">
-            {myPokedex.length !== 0 ? myPokedex.map((pokemon) => (
-                <MiniCard key={pokemon.pokedex_id} src={pokemon.sprites.regular} alt={pokemon.name.fr} label={pokemon.name.fr}/>
-            )) : "Votre Pokedex est vide pour le moment"}
+          {myPokedex.length !== 0
+            ? myPokedex.map((pokemon) => (
+                <MiniCard
+                  key={pokemon.pokedex_id}
+                  src={pokemon.sprites.regular}
+                  alt={pokemon.name.fr}
+                  label={pokemon.name.fr}
+                  onDetails={() => handleDetails(pokemon.pokedex_id)}
+                />
+              ))
+            : "Votre Pokedex est vide pour le moment"}
         </div>
         <CloseButton label="Close" onClick={() => setIsMyPokedex(false)} />
       </MyPokedexStyled>

@@ -12,20 +12,30 @@ export default function TextSection({ numero, namePokemon, typePokemon }: any) {
 }
 
 const TextWrapper = styled.div`
-  position: absolute;
-
-  img {
-    margin-top: 0;
-    width: 25px;
-    height: auto;
-  }
+  width: 100%;
+  padding: 15px;
+  text-align: center;
 
   p {
     margin: 0;
     color: #757575;
+    font-size: 14px;
   }
 
   h2 {
-    margin: 0;
+    margin: 5px 0;
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  img {
+    margin-top: 10px;
+    width: 25px;
+    height: auto;
+  }
+
+  &:hover h2 {
+    color: #ff6b6b; 
   }
 `;

@@ -14,12 +14,11 @@ import Stats from "./componentDetails/Stats";
 import Types from "./componentDetails/Types";
 
 export default function DetailsPokemon() {
-  const { setIsDetailsPokemon, pokemons, pokemonId, onAddFavorite } =
+  const { setIsDetailsPokemon, pokemons, pokemonId, onAddFavorite, myPokedex } =
     useContext(PokemonContext);
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
   const [isRegular, setIsRegular] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
 
@@ -27,10 +26,9 @@ export default function DetailsPokemon() {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
   }, [PokemonName]);
 
-  const handleAddFavorite = (resultsApiCallWithName: PokemonsType) => {
-    setIsFavorite(!isFavorite);
-    onAddFavorite(resultsApiCallWithName);
-  };
+  const isFavorite = myPokedex.some(
+    (pokemon) => pokemon.pokedex_id === pokemons[pokemonId].pokedex_id
+  );
 
   return (
     <>
@@ -51,7 +49,7 @@ export default function DetailsPokemon() {
               isRegular={isRegular}
               onRegular={() => setIsRegular(!isRegular)}
               isFavorite={isFavorite}
-              onHeart={() => handleAddFavorite(resultsApiCallWithName)}
+              onHeart={() => onAddFavorite(resultsApiCallWithName)}
             />
             <Stats
               stats={resultsApiCallWithName.stats}

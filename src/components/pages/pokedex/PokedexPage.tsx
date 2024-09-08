@@ -10,15 +10,24 @@ import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
 export default function PokedexPage() {
   const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
   const [isMyPokedex, setIsMyPokedex] = useState(false);
+  const [isHeartFavorite, setIsHeartFavorite] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [myPokedex, setMyPokedex] = useState<PokemonsType[]>([]);
   const [pokemonId, setPokemonId] = useState(0);
 
   const onAddFavorite = (NewFavorite: PokemonsType) => {
-    const isAlreadyInPokedex  = myPokedex.some((pokedex) => pokedex.pokedex_id === NewFavorite.pokedex_id)
-    if(!isAlreadyInPokedex ){
+    const isAlreadyInPokedex = myPokedex.some(
+      (pokedex) => pokedex.pokedex_id === NewFavorite.pokedex_id
+    );
+    const deletePokemonInPokedex = myPokedex.filter(
+      (pokemon) => pokemon.pokedex_id !== NewFavorite.pokedex_id
+    );
+    if (!isAlreadyInPokedex) {
       const updatedPokemons = [NewFavorite, ...myPokedex];
-      setMyPokedex(updatedPokemons);}
+      setMyPokedex(updatedPokemons);
+    } else {
+      setMyPokedex(deletePokemonInPokedex);
+    }
   };
 
   const PokemonContextValue = {
@@ -33,6 +42,8 @@ export default function PokedexPage() {
     onAddFavorite,
     myPokedex,
     setMyPokedex,
+    isHeartFavorite,
+    setIsHeartFavorite,
   };
 
   return (

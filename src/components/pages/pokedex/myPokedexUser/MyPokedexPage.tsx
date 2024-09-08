@@ -17,6 +17,7 @@ export default function MyPokedexPage() {
     <>
       <Overlay />
       <MyPokedexStyled>
+        <h1>Mon Pokedex :</h1>
         <div className="card">
           {myPokedex.length !== 0
             ? myPokedex.map((pokemon) => (

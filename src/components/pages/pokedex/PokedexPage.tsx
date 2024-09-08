@@ -5,11 +5,22 @@ import { useState } from "react";
 import { PokemonContext } from "../../../context/PokemonContext";
 import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
 import { PokemonsType } from "../../reusable-type/pokemonType";
+import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
+import { usePokedex } from "../../../hook/usePokedex";
 
 export default function PokedexPage() {
-  const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
+  const [isMyPokedex, setIsMyPokedex] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
-  const [pokemonId, setPokemonId] = useState(0);
+  const {
+    myPokedex,
+    setMyPokedex,
+    onAddFavorite,
+    handleDetails,
+    isDetailsPokemon,
+    pokemonId,
+    setPokemonId,
+    setIsDetailsPokemon,
+  } = usePokedex();
 
   const PokemonContextValue = {
     isDetailsPokemon,
@@ -18,6 +29,12 @@ export default function PokedexPage() {
     setPokemons,
     pokemonId,
     setPokemonId,
+    isMyPokedex,
+    setIsMyPokedex,
+    onAddFavorite,
+    myPokedex,
+    setMyPokedex,
+    handleDetails,
   };
 
   return (
@@ -25,6 +42,7 @@ export default function PokedexPage() {
       <PokedexPageStyled>
         <div className="container-pokemon">
           {isDetailsPokemon && <DetailsPokemon />}
+          {isMyPokedex && <MyPokedexPage />}
           <Navbar />
           <Pokedex />
         </div>

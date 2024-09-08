@@ -9,7 +9,9 @@ export type TypesType = {
 
 export type ToggleButtonType = {
   isRegular: boolean;
-  onClick: () => void;
+  onRegular: () => void;
+  isFavorite: boolean;
+  onHeart: () => void;
 };
 
 export type StatsType = {

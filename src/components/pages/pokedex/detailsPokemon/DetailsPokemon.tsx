@@ -14,13 +14,17 @@ import Stats from "./componentDetails/Stats";
 import Types from "./componentDetails/Types";
 
 export default function DetailsPokemon() {
-  const { setIsDetailsPokemon, pokemons, pokemonId } =
+  const { setIsDetailsPokemon, pokemons, pokemonId, onAddFavorite, myPokedex } =
     useContext(PokemonContext);
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
   const [isRegular, setIsRegular] = useState(true);
 
   const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
+
+  const isFavorite = myPokedex.some(
+    (pokemon) => pokemon.pokedex_id === pokemons[pokemonId].pokedex_id
+  );
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
@@ -43,7 +47,9 @@ export default function DetailsPokemon() {
             <PokemonNameTitle name={resultsApiCallWithName.name.fr} />
             <ToggleButton
               isRegular={isRegular}
-              onClick={() => setIsRegular(!isRegular)}
+              onRegular={() => setIsRegular(!isRegular)}
+              isFavorite={isFavorite}
+              onHeart={() => onAddFavorite(resultsApiCallWithName)}
             />
             <Stats
               stats={resultsApiCallWithName.stats}
@@ -71,7 +77,7 @@ const DetailsPokemonStyled = styled.div`
   height: auto;
   max-height: 90vh;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1001;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);

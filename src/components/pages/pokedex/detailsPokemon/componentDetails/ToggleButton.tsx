@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import { PiPokerChip, PiPokerChipFill } from "react-icons/pi";
 import { ToggleButtonType } from "./typeComponents";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-export default function ToggleButton({ isRegular, onClick }: ToggleButtonType) {
+export default function ToggleButton({
+  isRegular,
+  onRegular,
+  onHeart,
+  isFavorite,
+}: ToggleButtonType) {
   return (
-    <ToggleButtonStyled onClick={onClick}>
-      {isRegular ? <PiPokerChip /> : <PiPokerChipFill />}
+    <ToggleButtonStyled>
+      <div onClick={onRegular}>
+        {isRegular ? <PiPokerChip /> : <PiPokerChipFill />}
+      </div>
+      <div onClick={onHeart}>{isFavorite ? <FaHeart /> : <FaRegHeart />}</div>
     </ToggleButtonStyled>
   );
 }
@@ -13,8 +22,7 @@ export default function ToggleButton({ isRegular, onClick }: ToggleButtonType) {
 const ToggleButtonStyled = styled.button`
   background-color: #ffcc01;
   border: none;
-  border-radius: 50%;
-  width: 50px;
+  width: 100px;
   height: 50px;
   display: flex;
   justify-content: center;

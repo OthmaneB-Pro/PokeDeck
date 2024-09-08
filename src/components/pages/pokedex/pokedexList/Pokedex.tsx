@@ -9,8 +9,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
-  const { setIsDetailsPokemon, pokemons, setPokemons, setPokemonId } =
-    useContext(PokemonContext);
+  const { pokemons, setPokemons, handleDetails } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -22,17 +21,12 @@ export default function Pokedex() {
     fetchPokemons(selectedGeneration, setPokemons);
   };
 
-  const handleDetails = (idPokemon: number) => {
-    setIsDetailsPokemon(true);
-    setPokemonId(idPokemon - 1);
-  };
-
   return (
-    <PokedexStyled>
+    <div>
       <TitlePokedex />
       <SearchBar />
       <GenerationPokemon generation={generation} handleChange={handleChange} />
-      <div className="pokedex">
+      <PokedexStyled>
         {pokemons.map((pokemon) => (
           <CardPokedex
             key={pokemon.pokedex_id}
@@ -44,21 +38,15 @@ export default function Pokedex() {
             onDetails={() => handleDetails(pokemon.pokedex_id)}
           />
         ))}
-      </div>
-    </PokedexStyled>
+      </PokedexStyled>
+    </div>
   );
 }
 
 const PokedexStyled = styled.div`
-  .pokedex {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 30px;
-    margin-left: 35px;
-    margin-top: 20px;
-  }
-  button {
-    width: 240px;
-    background-color: black;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+  margin-left: 35px;
+  margin-top: 20px;
 `;

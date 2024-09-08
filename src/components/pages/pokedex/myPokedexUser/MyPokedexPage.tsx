@@ -13,7 +13,7 @@ export default function MyPokedexPage() {
       <MyPokedexStyled>
         <div className="card">
             {myPokedex.length !== 0 ? myPokedex.map((pokemon) => (
-                <MiniCard key={pokemon.pokedex_id} src={pokemon.sprites.regular} alt={pokemon.name.fr} />
+                <MiniCard key={pokemon.pokedex_id} src={pokemon.sprites.regular} alt={pokemon.name.fr} label={pokemon.name.fr}/>
             )) : "Votre Pokedex est vide pour le moment"}
         </div>
         <CloseButton label="Close" onClick={() => setIsMyPokedex(false)} />

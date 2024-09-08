@@ -15,8 +15,10 @@ export default function PokedexPage() {
   const [pokemonId, setPokemonId] = useState(0);
 
   const onAddFavorite = (NewFavorite: PokemonsType) => {
-    const updatedPokemons = [NewFavorite, ...myPokedex];
-    setMyPokedex(updatedPokemons);
+    const isAlreadyInPokedex  = myPokedex.some((pokedex) => pokedex.pokedex_id === NewFavorite.pokedex_id)
+    if(!isAlreadyInPokedex ){
+      const updatedPokemons = [NewFavorite, ...myPokedex];
+      setMyPokedex(updatedPokemons);}
   };
 
   const PokemonContextValue = {

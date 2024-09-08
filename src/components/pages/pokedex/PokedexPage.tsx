@@ -13,6 +13,11 @@ export default function PokedexPage() {
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
   const [pokemonId, setPokemonId] = useState(0);
 
+  const onAddFavorite = (NewFavorite: PokemonsType) => {
+    const updatedPokemons = [NewFavorite, ...pokemons];
+    setPokemons(updatedPokemons);
+  };
+
   const PokemonContextValue = {
     isDetailsPokemon,
     setIsDetailsPokemon,
@@ -22,6 +27,7 @@ export default function PokedexPage() {
     setPokemonId,
     isMyPokedex,
     setIsMyPokedex,
+    onAddFavorite,
   };
 
   return (

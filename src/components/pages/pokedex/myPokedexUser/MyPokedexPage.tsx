@@ -16,7 +16,6 @@ export default function MyPokedexPage() {
           <MiniCard src="oo" alt="MiniCard" />
           <MiniCard src="oo" alt="MiniCard" />
           <MiniCard src="oo" alt="MiniCard" />
-          
         </div>
         <CloseButton label="Close" onClick={() => setIsMyPokedex(false)} />
       </MyPokedexStyled>

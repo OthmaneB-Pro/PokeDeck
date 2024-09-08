@@ -14,7 +14,16 @@ export default function MiniCard({ src, alt }: MiniCardType) {
 }
 
 const MiniCardStyled = styled.div`
-  background-color: red;
+  background-color: #dddddd;
   width: 200px;
   height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  img {
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+  }
 `;

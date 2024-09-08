@@ -10,7 +10,7 @@ export type TypesType = {
 export type ToggleButtonType = {
   isRegular: boolean;
   onRegular: () => void;
-  isFavorite : boolean;
+  isFavorite: boolean;
   onHeart: () => void;
 };
 

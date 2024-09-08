@@ -28,11 +28,11 @@ export default function Pokedex() {
   };
 
   return (
-    <PokedexStyled>
+    <div>
       <TitlePokedex />
       <SearchBar />
       <GenerationPokemon generation={generation} handleChange={handleChange} />
-      <div className="pokedex">
+      <PokedexStyled>
         {pokemons.map((pokemon) => (
           <CardPokedex
             key={pokemon.pokedex_id}
@@ -44,21 +44,15 @@ export default function Pokedex() {
             onDetails={() => handleDetails(pokemon.pokedex_id)}
           />
         ))}
-      </div>
-    </PokedexStyled>
+      </PokedexStyled>
+    </div>
   );
 }
 
 const PokedexStyled = styled.div`
-  .pokedex {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 30px;
-    margin-left: 35px;
-    margin-top: 20px;
-  }
-  button {
-    width: 240px;
-    background-color: black;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+  margin-left: 35px;
+  margin-top: 20px;
 `;

@@ -22,13 +22,13 @@ export default function DetailsPokemon() {
 
   const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
 
-  useEffect(() => {
-    fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
-  }, [PokemonName]);
-
   const isFavorite = myPokedex.some(
     (pokemon) => pokemon.pokedex_id === pokemons[pokemonId].pokedex_id
   );
+
+  useEffect(() => {
+    fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
+  }, [PokemonName]);
 
   return (
     <>

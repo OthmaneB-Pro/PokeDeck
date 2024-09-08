@@ -9,8 +9,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function Pokedex() {
   const [generation, setGeneration] = useState(1);
-  const { setIsDetailsPokemon, pokemons, setPokemons, setPokemonId } =
-    useContext(PokemonContext);
+  const { pokemons, setPokemons, handleDetails } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -20,11 +19,6 @@ export default function Pokedex() {
     const selectedGeneration = parseInt(event.target.value);
     setGeneration(selectedGeneration);
     fetchPokemons(selectedGeneration, setPokemons);
-  };
-
-  const handleDetails = (idPokemon: number) => {
-    setIsDetailsPokemon(true);
-    setPokemonId(idPokemon - 1);
   };
 
   return (

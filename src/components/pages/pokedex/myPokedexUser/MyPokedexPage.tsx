@@ -4,32 +4,32 @@ import Overlay from "../detailsPokemon/Overlay";
 import CloseButton from "../detailsPokemon/componentDetails/CloseButton";
 import styled from "styled-components";
 import MiniCard from "./MiniCard";
+import TitlePokedex from "./textMyPokedex/TitlePokedex";
+import EmptyPokedex from "./textMyPokedex/EmptyPokedex";
 
 export default function MyPokedexPage() {
-  const { setIsMyPokedex, myPokedex, setIsDetailsPokemon, setPokemonId } =
+  const { setIsMyPokedex, myPokedex, handleDetails } =
     useContext(PokemonContext);
 
-  const handleDetails = (idPokemon: number) => {
-    setIsDetailsPokemon(true);
-    setPokemonId(idPokemon - 1);
-  };
   return (
     <>
       <Overlay />
       <MyPokedexStyled>
-        <h1>Mon Pokedex :</h1>
-        <div className="card">
-          {myPokedex.length !== 0
-            ? myPokedex.map((pokemon) => (
-                <MiniCard
-                  key={pokemon.pokedex_id}
-                  src={pokemon.sprites.regular}
-                  alt={pokemon.name.fr}
-                  label={pokemon.name.fr}
-                  onDetails={() => handleDetails(pokemon.pokedex_id)}
-                />
-              ))
-            : "Votre Pokedex est vide pour le moment"}
+        <TitlePokedex />
+        <div className={myPokedex.length !== 0 ? "card" : ""}>
+          {myPokedex.length !== 0 ? (
+            myPokedex.map((pokemon) => (
+              <MiniCard
+                key={pokemon.pokedex_id}
+                src={pokemon.sprites.regular}
+                alt={pokemon.name.fr}
+                label={pokemon.name.fr}
+                onDetails={() => handleDetails(pokemon.pokedex_id)}
+              />
+            ))
+          ) : (
+            <EmptyPokedex />
+          )}
         </div>
         <CloseButton label="Close" onClick={() => setIsMyPokedex(false)} />
       </MyPokedexStyled>

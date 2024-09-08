@@ -9,11 +9,18 @@ import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
 import { usePokedex } from "../../../hook/usePokedex";
 
 export default function PokedexPage() {
-  const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
   const [isMyPokedex, setIsMyPokedex] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
-  const [pokemonId, setPokemonId] = useState(0);
-  const { myPokedex, setMyPokedex, onAddFavorite } = usePokedex();
+  const {
+    myPokedex,
+    setMyPokedex,
+    onAddFavorite,
+    handleDetails,
+    isDetailsPokemon,
+    pokemonId,
+    setPokemonId,
+    setIsDetailsPokemon,
+  } = usePokedex();
 
   const PokemonContextValue = {
     isDetailsPokemon,
@@ -27,6 +34,7 @@ export default function PokedexPage() {
     onAddFavorite,
     myPokedex,
     setMyPokedex,
+    handleDetails,
   };
 
   return (

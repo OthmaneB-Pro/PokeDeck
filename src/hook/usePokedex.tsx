@@ -3,6 +3,8 @@ import { PokemonsType } from "../components/reusable-type/pokemonType";
 
 export const usePokedex = () => {
   const [myPokedex, setMyPokedex] = useState<PokemonsType[]>([]);
+  const [isDetailsPokemon, setIsDetailsPokemon] = useState(false);
+  const [pokemonId, setPokemonId] = useState(0);
 
   const onAddFavorite = (NewFavorite: PokemonsType) => {
     const isAlreadyInPokedex = myPokedex.some(
@@ -19,9 +21,19 @@ export const usePokedex = () => {
     }
   };
 
+  const handleDetails = (idPokemon: number) => {
+    setIsDetailsPokemon(true);
+    setPokemonId(idPokemon - 1);
+  };
+
   return {
     myPokedex,
     setMyPokedex,
     onAddFavorite,
+    handleDetails,
+    isDetailsPokemon,
+    setIsDetailsPokemon,
+    pokemonId,
+    setPokemonId,
   };
 };

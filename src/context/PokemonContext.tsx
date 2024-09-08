@@ -13,6 +13,7 @@ type PokemonContextType = {
   onAddFavorite: (NewFavorite: PokemonsType) => void;
   myPokedex: PokemonsType[];
   setMyPokedex: React.Dispatch<React.SetStateAction<PokemonsType[]>>;
+  handleDetails : (idPokemon: number) => void;
 };
 
 export const PokemonContext = createContext<PokemonContextType>({
@@ -27,4 +28,5 @@ export const PokemonContext = createContext<PokemonContextType>({
   onAddFavorite: () => {},
   myPokedex: [],
   setMyPokedex: () => {},
+  handleDetails : () => {},
 });

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
+import { FaArrowUp } from "react-icons/fa";
 import styled from "styled-components";
 
-export default function ScrollToTopButton () {
+export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "smooth",
     });
   };
 
@@ -21,16 +22,16 @@ export default function ScrollToTopButton () {
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    
+
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   return (
     <ScrollToTopStyled onClick={scrollToTop} isVisible={isVisible}>
-      ↑
+      <FaArrowUp />
     </ScrollToTopStyled>
   );
-};
+}
 
 const ScrollToTopStyled = styled.button<{ isVisible: boolean }>`
   position: fixed;
@@ -39,7 +40,7 @@ const ScrollToTopStyled = styled.button<{ isVisible: boolean }>`
   width: 50px;
   height: 50px;
   font-size: 24px;
-  background-color: #ff6b6b;;
+  background-color: #ff6b6b;
   color: white;
   border: none;
   border-radius: 50%;

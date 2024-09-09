@@ -6,7 +6,7 @@ import GenerationPokemon from "./../pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
 import SearchBar from "./../search/SearchBar";
 import { PokemonContext } from "../../../../context/PokemonContext";
-import ScrollToTopButton from "./buttonScrollTop/ScrollToTopButton";
+import ScrollToTopButton from "../../../reusable-ui/ScrollToTopButton";
 
 export default function Pokedex() {
   const { pokemons, setPokemons, handleDetails, generation, setGeneration } =

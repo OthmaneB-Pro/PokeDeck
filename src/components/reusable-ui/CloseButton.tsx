@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CloseButtonType } from "./typeComponents";
+import { CloseButtonType } from "../pages/pokedex/detailsPokemon/componentDetails/typeComponents";
 
 export default function CloseButton({ onClick, label }: CloseButtonType) {
   return <CloseButtonStyled onClick={onClick}>{label}</CloseButtonStyled>;

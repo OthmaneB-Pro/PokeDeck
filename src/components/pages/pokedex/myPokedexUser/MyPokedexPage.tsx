@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PokemonContext } from "../../../../context/PokemonContext";
 import Overlay from "../detailsPokemon/Overlay";
-import CloseButton from "../detailsPokemon/componentDetails/CloseButton";
+import CloseButton from "../../../reusable-ui/CloseButton";
 import styled from "styled-components";
 import MiniCard from "./MiniCard";
 import TitlePokedex from "./textMyPokedex/TitlePokedex";

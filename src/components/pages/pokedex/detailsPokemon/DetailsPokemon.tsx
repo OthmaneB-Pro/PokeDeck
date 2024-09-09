@@ -9,7 +9,7 @@ import {
 } from "../../../../utils/functionPokemon";
 import Loading from "./componentDetails/Loading";
 import Overlay from "./Overlay";
-import CloseButton from "./componentDetails/CloseButton";
+import CloseButton from "../../../reusable-ui/CloseButton";
 import PokemonImage from "./componentDetails/PokemonImage";
 import PokemonNameTitle from "./componentDetails/PokemonNameTitle";
 import ToggleButton from "./componentDetails/ToggleButton";

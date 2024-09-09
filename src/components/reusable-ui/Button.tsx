@@ -10,7 +10,7 @@ export default function Button({ type = "submit", label }: ButtonType) {
 }
 
 const ButtonStyled = styled.button`
-  background-color: #3a92da;
+  background-color: #ff6b6b;;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -23,7 +23,7 @@ const ButtonStyled = styled.button`
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    background-color: #357ab7;
+    background-color: #ff4a4a;
     transform: translateY(-2px);
   }
 

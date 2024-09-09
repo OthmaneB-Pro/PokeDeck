@@ -7,6 +7,7 @@ import DetailsPokemon from "./detailsPokemon/DetailsPokemon";
 import { PokemonsType } from "../../reusable-type/pokemonType";
 import MyPokedexPage from "./myPokedexUser/MyPokedexPage";
 import { usePokedex } from "../../../hook/usePokedex";
+import { Toaster } from 'react-hot-toast';
 
 export default function PokedexPage() {
   const [isMyPokedex, setIsMyPokedex] = useState(false);
@@ -44,6 +45,7 @@ export default function PokedexPage() {
     <PokemonContext.Provider value={PokemonContextValue}>
       <PokedexPageStyled>
         <div className="container-pokemon">
+          <Toaster/>
           {isDetailsPokemon && <DetailsPokemon />}
           {isMyPokedex && <MyPokedexPage />}
           <Navbar />

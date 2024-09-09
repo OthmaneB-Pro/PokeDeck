@@ -8,7 +8,7 @@ import TitlePokedex from "./textMyPokedex/TitlePokedex";
 import EmptyPokedex from "./textMyPokedex/EmptyPokedex";
 
 export default function MyPokedexPage() {
-  const { setIsMyPokedex, myPokedex, handleDetails } =
+  const { setIsMyPokedex, myPokedex, handleDetails, generation } =
     useContext(PokemonContext);
 
   return (
@@ -24,7 +24,7 @@ export default function MyPokedexPage() {
                 src={pokemon.sprites.regular}
                 alt={pokemon.name.fr}
                 label={pokemon.name.fr}
-                onDetails={() => handleDetails(pokemon.pokedex_id)}
+                onDetails={() => handleDetails(pokemon.pokedex_id, generation)}
               />
             ))
           ) : (

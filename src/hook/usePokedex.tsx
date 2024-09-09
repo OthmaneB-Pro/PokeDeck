@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PokemonsType } from "../components/reusable-type/pokemonType";
+import { calculateGlobalId } from "../utils/functionPokemon";
 
 export const usePokedex = () => {
   const [myPokedex, setMyPokedex] = useState<PokemonsType[]>([]);
@@ -21,9 +22,10 @@ export const usePokedex = () => {
     }
   };
 
-  const handleDetails = (idPokemon: number) => {
+  const handleDetails = (localId: number, generation: number) => {
     setIsDetailsPokemon(true);
-    setPokemonId(idPokemon - 1);
+    const globalId = calculateGlobalId(localId, generation);
+    setPokemonId(globalId - 1);
   };
 
   return {

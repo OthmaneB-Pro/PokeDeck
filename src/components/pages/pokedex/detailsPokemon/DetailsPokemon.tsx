@@ -3,7 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { PokemonContext } from "../../../../context/PokemonContext";
 import { fetchSearchPokemonsName } from "../../../../api/PokemonApi";
 import { PokemonsType } from "../../../reusable-type/pokemonType";
-import { removeAccents } from "../../../../utils/functionPokemon";
+import {
+  calculateGlobalId,
+  removeAccents,
+} from "../../../../utils/functionPokemon";
 import Loading from "./componentDetails/Loading";
 import Overlay from "./Overlay";
 import CloseButton from "./componentDetails/CloseButton";
@@ -14,17 +17,24 @@ import Stats from "./componentDetails/Stats";
 import Types from "./componentDetails/Types";
 
 export default function DetailsPokemon() {
-  const { setIsDetailsPokemon, pokemons, pokemonId, onAddFavorite, myPokedex } =
-    useContext(PokemonContext);
+  const {
+    setIsDetailsPokemon,
+    pokemons,
+    pokemonId,
+    onAddFavorite,
+    myPokedex,
+    generation,
+  } = useContext(PokemonContext);
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
   const [isRegular, setIsRegular] = useState(true);
 
-  const PokemonName = removeAccents(pokemons[pokemonId].name.fr);
-
-  const isFavorite = myPokedex.some(
-    (pokemon) => pokemon.pokedex_id === pokemons[pokemonId].pokedex_id
+  const pokemon = pokemons.find(
+    (poke) => calculateGlobalId(poke.pokedex_id, generation) === pokemonId + 1
   );
+  const PokemonName = removeAccents(pokemon ? pokemon.name.fr : "");
+
+  const isFavorite = myPokedex.some((poke) => poke.name.fr === PokemonName);
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);
@@ -42,7 +52,7 @@ export default function DetailsPokemon() {
                   ? resultsApiCallWithName.sprites.regular
                   : resultsApiCallWithName.sprites.shiny
               }
-              alt={`${resultsApiCallWithName.name.fr}`}
+              alt={resultsApiCallWithName.name.fr}
             />
             <PokemonNameTitle name={resultsApiCallWithName.name.fr} />
             <ToggleButton

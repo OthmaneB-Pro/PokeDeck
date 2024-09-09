@@ -17,8 +17,14 @@ import Stats from "./componentDetails/Stats";
 import Types from "./componentDetails/Types";
 
 export default function DetailsPokemon() {
-  const { setIsDetailsPokemon, pokemons, pokemonId, onAddFavorite, myPokedex, generation } =
-    useContext(PokemonContext);
+  const {
+    setIsDetailsPokemon,
+    pokemons,
+    pokemonId,
+    onAddFavorite,
+    myPokedex,
+    generation,
+  } = useContext(PokemonContext);
   const [resultsApiCallWithName, setResultsApiCallWithName] =
     useState<PokemonsType | null>(null);
   const [isRegular, setIsRegular] = useState(true);
@@ -28,9 +34,7 @@ export default function DetailsPokemon() {
   );
   const PokemonName = removeAccents(pokemon ? pokemon.name.fr : "");
 
-  const isFavorite = myPokedex.some(
-    (pokemon) => pokemon.pokedex_id === pokemons[pokemonId].pokedex_id
-  );
+  const isFavorite = myPokedex.some((poke) => poke.name.fr === PokemonName);
 
   useEffect(() => {
     fetchSearchPokemonsName(PokemonName, setResultsApiCallWithName);

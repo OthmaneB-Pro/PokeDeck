@@ -9,7 +9,7 @@ import {
 } from "../../../../utils/functionPokemon";
 import Loading from "./componentDetails/Loading";
 import Overlay from "./Overlay";
-import CloseButton from "./componentDetails/CloseButton";
+import CloseButton from "../../../reusable-ui/CloseButton";
 import PokemonImage from "./componentDetails/PokemonImage";
 import PokemonNameTitle from "./componentDetails/PokemonNameTitle";
 import ToggleButton from "./componentDetails/ToggleButton";
@@ -94,4 +94,11 @@ const DetailsPokemonStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 900px) {
+    width: 500px;
+  }
+  @media (max-width: 680px) {
+    width: 300px;
+  }
 `;

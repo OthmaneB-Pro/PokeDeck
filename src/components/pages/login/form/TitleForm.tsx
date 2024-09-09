@@ -1,8 +1,5 @@
 import styled from "styled-components";
-
-type TitleFormType = {
-  isLogin: boolean;
-};
+import { TitleFormType } from "./LoginType";
 
 export default function TitleForm({ isLogin }: TitleFormType) {
   return (

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PokemonContext } from "../../../../context/PokemonContext";
 import Overlay from "../detailsPokemon/Overlay";
-import CloseButton from "../detailsPokemon/componentDetails/CloseButton";
+import CloseButton from "../../../reusable-ui/CloseButton";
 import styled from "styled-components";
 import MiniCard from "./MiniCard";
 import TitlePokedex from "./textMyPokedex/TitlePokedex";
@@ -59,5 +59,24 @@ const MyPokedexStyled = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+  }
+  @media (max-width: 1130px) {
+    width: 700px;
+    .card {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 900px) {
+    width: 500px;
+    .card {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 680px) {
+    width: 300px;
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;

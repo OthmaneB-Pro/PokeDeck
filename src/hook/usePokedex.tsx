@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PokemonsType } from "../components/reusable-type/pokemonType";
 import { calculateGlobalId } from "../utils/functionPokemon";
+import toast from "react-hot-toast";
 
 export const usePokedex = () => {
   const [myPokedex, setMyPokedex] = useState<PokemonsType[]>([]);
@@ -17,8 +18,10 @@ export const usePokedex = () => {
     if (!isAlreadyInPokedex) {
       const updatedPokemons = [NewFavorite, ...myPokedex];
       setMyPokedex(updatedPokemons);
+      toast.success("Le Pokemon est bien ajouté au pokedex");
     } else {
       setMyPokedex(deletePokemonInPokedex);
+      toast.success("Le Pokemon est bien supprimer du pokedex");
     }
   };
 

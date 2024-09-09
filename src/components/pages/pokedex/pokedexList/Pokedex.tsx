@@ -51,15 +51,15 @@ const PokedexStyled = styled.div`
   margin-top: 20px;
 
   @media (max-width: 1130px) {
-    grid-template-columns: repeat(3, 1fr); 
-    }
-    @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr); 
-    }
-    @media (max-width: 680px) {
-    display : flex;
-    flex-direction : column;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 680px) {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    }
+  }
 `;

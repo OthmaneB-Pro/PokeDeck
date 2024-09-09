@@ -6,6 +6,7 @@ import GenerationPokemon from "./../pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
 import SearchBar from "./../search/SearchBar";
 import { PokemonContext } from "../../../../context/PokemonContext";
+import ScrollToTopButton from "./buttonScrollTop/ScrollToTopButton";
 
 export default function Pokedex() {
   const { pokemons, setPokemons, handleDetails, generation, setGeneration } =
@@ -38,6 +39,7 @@ export default function Pokedex() {
             onDetails={() => handleDetails(pokemon.pokedex_id, generation)}
           />
         ))}
+        <ScrollToTopButton />
       </PokedexStyled>
     </div>
   );

@@ -11,6 +11,7 @@ import { usePokedex } from "../../../hook/usePokedex";
 export default function PokedexPage() {
   const [isMyPokedex, setIsMyPokedex] = useState(false);
   const [pokemons, setPokemons] = useState<PokemonsType[]>([]);
+  const [generation, setGeneration] = useState(1);
   const {
     myPokedex,
     setMyPokedex,
@@ -35,6 +36,8 @@ export default function PokedexPage() {
     myPokedex,
     setMyPokedex,
     handleDetails,
+    generation,
+    setGeneration,
   };
 
   return (

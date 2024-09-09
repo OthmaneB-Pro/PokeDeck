@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import CardPokedex from "../../../reusable-ui/CardPokedex";
 import { fetchPokemons } from "../../../../api/PokemonApi";
 import GenerationPokemon from "./../pokemonSort/GenerationPokemon";
 import TitlePokedex from "./TitlePokedex";
 import SearchBar from "./../search/SearchBar";
 import { PokemonContext } from "../../../../context/PokemonContext";
+import { calculateGlobalId } from "../../../../utils/functionPokemon";
 
 export default function Pokedex() {
-  const [generation, setGeneration] = useState(1);
-  const { pokemons, setPokemons, handleDetails } = useContext(PokemonContext);
+  const { pokemons, setPokemons, handleDetails, generation, setGeneration } = useContext(PokemonContext);
 
   useEffect(() => {
     fetchPokemons(generation, setPokemons);
@@ -35,8 +35,7 @@ export default function Pokedex() {
             src={pokemon.sprites.regular}
             alt={pokemon.name.fr}
             typePokemon={pokemon.types.map((type) => type.image)}
-            onDetails={() => handleDetails(pokemon.pokedex_id)}
-          />
+            onDetails={() => handleDetails(pokemon.pokedex_id, generation)}          />
         ))}
       </PokedexStyled>
     </div>

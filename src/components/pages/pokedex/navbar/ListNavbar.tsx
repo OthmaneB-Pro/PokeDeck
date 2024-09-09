@@ -5,7 +5,7 @@ import { PokemonContext } from "../../../../context/PokemonContext";
 
 export default function ListNavbar() {
   const { username } = useParams();
-  const {setIsMyPokedex} = useContext(PokemonContext)
+  const { setIsMyPokedex } = useContext(PokemonContext);
 
   return (
     <ListNavbarStyled>
@@ -13,8 +13,8 @@ export default function ListNavbar() {
         <li>
           <a href="/">Déconnexion</a>
         </li>
-        <li onClick={()=> setIsMyPokedex(true)}>
-         <span>Votre Pokedex {username}</span> 
+        <li onClick={() => setIsMyPokedex(true)}>
+          <span>Votre Pokedex {username}</span>
         </li>
       </ul>
     </ListNavbarStyled>
@@ -31,7 +31,8 @@ const ListNavbarStyled = styled.nav`
       font-weight: 700;
       cursor: pointer;
 
-      span, a {
+      span,
+      a {
         text-decoration: none;
         color: black;
         position: relative;
@@ -40,9 +41,17 @@ const ListNavbarStyled = styled.nav`
         transition: color 0.3s ease;
       }
 
-      span:hover, a:hover {
+      span:hover,
+      a:hover {
         color: #ff6b6b;
         transform: translateY(-3px);
+      }
+    }
+  }
+  @media (max-width: 680px) {
+    ul {
+      li {
+        font-size: 14px;
       }
     }
   }
